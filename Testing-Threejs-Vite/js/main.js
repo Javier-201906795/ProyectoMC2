@@ -24,14 +24,32 @@ camera.position.set(0,5,8)
 camera.lookAt(cube.position)
 
 
-//Gira con tecla
+//Escucha cada segundo
 loopMachine.addCallback(() => {
-	if (keyListener.isPressed(keyCode.ENTER)) {
-		cube.rotation.y += 0.01
+	if (keyListener.isPressed(keyCode.ARROWUP)) {
+		//Iniciar
+		let rotarcubo = setInterval(() => {
+			cube.rotation.y += 0.01
+			cube.position.y += 0.01
+			renderer.render( scene, camera );
+		}, 1000/60);
+		//Detener rotacion
+		setTimeout(() => {clearInterval(rotarcubo);},1000);
 	}
-	renderer.render( scene, camera );// take picture
+	if (keyListener.isPressed(keyCode.ARROWDOWN)) {
+		//Iniciar
+		let rotarcubo2 = setInterval(() => {
+			cube.rotation.y -= 0.01
+			cube.position.y -= 0.01
+			renderer.render( scene, camera );
+		}, 1000/60);
+		//Detener rotacion
+		setTimeout(() => {clearInterval(rotarcubo2);},1000);
+	}
+	
 });
 //DEBE IR AL FINAL
+renderer.render( scene, camera );// take picture
 loopMachine.start()
 keyListener.start()
 
