@@ -20,6 +20,7 @@ camera.lookAt(cube.position)
 //take picture
 //renderer.render( scene, camera );
 
+//Grira
 setInterval(() => {
 	cube.rotation.y += 0.01
 	renderer.render( scene, camera );
