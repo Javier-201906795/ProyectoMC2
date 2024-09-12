@@ -6,35 +6,26 @@ import renderer from './basic/Render.js';
 import cube from './shapes/Cube.js';
 import light from './basic/Ligth.js';
 import directionalLight from './basic/DirectionLigth.js';
-import plane from './shapes/Plane.js';
-import loopMachine from './LoopMachine.js';
 
 
 console.log(scene, camera, renderer, cube);
 
-
-scene.add(plane);
 scene.add( cube );
 scene.add( light );
 scene.add( directionalLight );
 
-camera.position.set(0,5,8)
+camera.position.set(2,2,2)
 camera.lookAt(cube.position)
 
 //take picture
 //renderer.render( scene, camera );
 
 //Grira
-// setInterval(() => {
-// 	cube.rotation.y += 0.01
-// 	renderer.render( scene, camera );
-// }, 1000/60);
-
-
-//Gira V2.0
-loopMachine.addCallback(() => {
+setInterval(() => {
 	cube.rotation.y += 0.01
 	renderer.render( scene, camera );
-});
+}, 1000/60);
 
-loopMachine.start()
+
+
+
