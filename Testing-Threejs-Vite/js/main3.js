@@ -23,6 +23,24 @@ scene.add( directionalLight );
 camera.position.set(0,5,8)
 camera.lookAt(cube.position)
 
+//take picture
+//renderer.render( scene, camera );
+
+//Grira
+// setInterval(() => {
+// 	cube.rotation.y += 0.01
+// 	renderer.render( scene, camera );
+// }, 1000/60);
+
+
+// //Gira V2.0
+// loopMachine.addCallback(() => {
+// 	cube.rotation.y += 0.01
+// 	renderer.render( scene, camera );
+// });
+// //Gira v2.0 DEBE IR AL FINAL
+// loopMachine.start()
+
 
 //Gira con tecla
 loopMachine.addCallback(() => {
