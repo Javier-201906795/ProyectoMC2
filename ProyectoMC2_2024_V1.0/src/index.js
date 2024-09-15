@@ -5,6 +5,7 @@ import { createRenderer } from "./scene/renderer.js";
 import { addControls } from "./scene/controls.js";
 import { loadModel } from "./loaders/gltfLoader.js";
 import { addResizeListener } from "./scene/resizeListener.js";
+import { addMouseMoveListener } from './windows/mouseMoveListener.js';
 
 // Crear la escena
 const scene = new THREE.Scene();
@@ -12,7 +13,6 @@ const scene = new THREE.Scene();
 // Crear la cámara
 const camera = createCamera();
 let objToRender = 'one';
-//camera.position.z = 50;
 camera.position.z = objToRender === 'eye' ? 400 : objToRender === 'dino' ? 20 : 5;
 
 
@@ -45,14 +45,16 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-// Añadir el listener para redimensionar la ventana
-addResizeListener(camera, renderer);
+
 
 // Listener para el movimiento del ratón
 document.onmousemove = (e) => {
   mouseX = e.clientX;
   mouseY = e.clientY;
 };
+
+// Añadir el listener para redimensionar la ventana
+addResizeListener(camera, renderer);
 
 // Iniciar la animación
 animate();
