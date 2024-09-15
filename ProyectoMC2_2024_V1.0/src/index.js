@@ -11,8 +11,10 @@ const scene = new THREE.Scene();
 
 // Crear la cámara
 const camera = createCamera();
-let objToRender = 'eye';
-camera.position.z = 400;
+let objToRender = 'one';
+//camera.position.z = 50;
+camera.position.z = objToRender === 'eye' ? 400 : objToRender === 'dino' ? 20 : 5;
+
 
 // Agregar las luces
 addLights(scene, objToRender);
@@ -36,7 +38,7 @@ loadModel(`models/${objToRender}/scene.gltf`, scene, (gltf) => {
 // Función de animación
 function animate() {
   requestAnimationFrame(animate);
-  if (object && objToRender === "eye") {
+  if (object ) {
     object.rotation.y = -3 + mouseX / window.innerWidth * 3;
     object.rotation.x = -1.2 + mouseY * 2.5 / window.innerHeight;
   }
