@@ -5,13 +5,13 @@ import { createRenderer } from "./scene/renderer.js";
 import { addControls } from "./scene/controls.js";
 import { loadModel } from "./loaders/gltfLoader.js";
 import { addResizeListener } from "./scene/resizeListener.js";
-import { addMouseMoveListener } from './windows/mouseMoveListener.js';
 
 // Crear la escena
 const scene = new THREE.Scene();
 
 // Crear la cámara
 const camera = createCamera();
+
 let objToRender = 'one';
 camera.position.z = objToRender === 'eye' ? 400 : objToRender === 'dino' ? 20 : 5;
 
