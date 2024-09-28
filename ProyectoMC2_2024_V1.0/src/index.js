@@ -60,6 +60,18 @@ loader2.load(
   }
 );
 
+
+let object3
+// Cargar el modelo GLTF3
+loadModel(`models/card4/scene.gltf`, scene, (gltf) => {
+  object3 = gltf.scene;
+  scene.add(object3);
+});
+
+
+
+
+
 //Bandera para fograma inicial
 let flagstart = true;
 
@@ -70,6 +82,7 @@ function animate() {
     if (flagstart){
       object.position.y = 0
       object2.position.x = 3
+      object3.position.x = -3
       renderer.render(scene, camera);
       flagstart = false;
     }
