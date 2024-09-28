@@ -77,9 +77,31 @@ function animate() {
   
   //SI preciona tecla arriva
   if (keyListener.isPressed(keyCode.ARROWUP)){
-    object.rotation.y += 0.1
+    //rotar a 60 fps
+    let rotarcarta1 = setInterval(() => {
+      object.rotation.y += 0.01  
+      object.position.y += 0.01  
+      renderer.render(scene, camera);
+      console.log(object.rotation)
+    }, 1000/60);
+    //Detiene en tiempo determinado
+    setTimeout(() => {clearInterval(rotarcarta1);},1000);
   }
-  renderer.render(scene, camera);
+
+
+  //SI preciona tecla arriva
+  if (keyListener.isPressed(keyCode.ARROWDOWN)){
+    //rotar a 60 fps
+    let rotarcarta2 = setInterval(() => {
+      object.rotation.y -= 0.01  
+      object.position.y -= 0.01  
+      renderer.render(scene, camera);
+      console.log(object.rotation)
+    }, 1000/60);
+    //Detiene en tiempo determinado
+    setTimeout(() => {clearInterval(rotarcarta2);},1000);
+  }
+  
 }
 
 
