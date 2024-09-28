@@ -20,10 +20,10 @@
 			"mesh":0,
 			"name":"Two of Spades",
 			"rotation":[
-				0.5000000596046448,
-				0.4999999403953552,
-				-0.5000000596046448,
-				0.4999999403953552
+				0.7071068286895752,
+				0,
+				0,
+				0.7071068286895752
 			],
 			"scale":[
 				0.028504615649580956,
@@ -47,7 +47,7 @@
 			"samplers":[
 				{
 					"input":12,
-					"interpolation":"STEP",
+					"interpolation":"LINEAR",
 					"output":13
 				}
 			]
@@ -271,9 +271,9 @@
 		{
 			"bufferView":12,
 			"componentType":5126,
-			"count":2,
+			"count":1,
 			"max":[
-				8.125
+				0
 			],
 			"min":[
 				0
@@ -283,7 +283,7 @@
 		{
 			"bufferView":13,
 			"componentType":5126,
-			"count":2,
+			"count":1,
 			"type":"VEC3"
 		}
 	],
@@ -362,13 +362,13 @@
 		},
 		{
 			"buffer":0,
-			"byteLength":8,
+			"byteLength":4,
 			"byteOffset":3176
 		},
 		{
 			"buffer":0,
-			"byteLength":24,
-			"byteOffset":3184
+			"byteLength":12,
+			"byteOffset":3180
 		}
 	],
 	"samplers":[
@@ -379,7 +379,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":3208,
+			"byteLength":3192,
 			"uri":"scene.bin"
 		}
 	]
