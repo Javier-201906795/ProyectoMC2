@@ -12,8 +12,8 @@ const scene = new THREE.Scene();
 // Crear la cámara
 const camera = createCamera();
 
-let objToRender = 'one';
-camera.position.z = objToRender === 'eye' ? 400 : objToRender === 'dino' ? 20 : 5;
+let objToRender = 'card2';
+camera.position.z = objToRender === 'eye' ? 400 : objToRender === 'dino' ? 20 : objToRender === 'card2' ? 0.5 : 5;
 
 
 // Agregar las luces
