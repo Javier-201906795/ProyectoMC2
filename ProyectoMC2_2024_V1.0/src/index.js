@@ -1,4 +1,5 @@
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
+import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
 import { createCamera } from "./scene/camera.js";
 import { addLights } from "./scene/lights.js";
 import { createRenderer } from "./scene/renderer.js";
@@ -17,7 +18,7 @@ const scene = new THREE.Scene();
 const camera = createCamera();
 
 //Slecciona objeto 3D a importar 
-let objToRender = 'card4';
+let objToRender = 'card5';
 camera.position.z = 10;
 
 
@@ -41,12 +42,41 @@ loadModel(`models/${objToRender}/scene.gltf`, scene, (gltf) => {
 });
 
 
+// Cargar el modelo GLTF2
+const loader2 = new GLTFLoader();
+let path2 = "models/card4/scene.gltf"
+let object2
+loader2.load(
+  path2,
+  function (gltf) {
+    object2 = gltf.scene;
+    scene.add(object2);  
+  },
+  function (xhr) {
+    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+  },
+  function (error) {
+    console.error(error);
+  }
+);
 
-
-
+//Bandera para fograma inicial
+let flagstart = true;
 
 // Función de animación mouse
 function animate() {
+  //render inicial
+  if(object){
+    if (flagstart){
+      object.position.y = 0
+      object2.position.x = 3
+      renderer.render(scene, camera);
+      flagstart = false;
+    }
+  }
+  
+
+
   requestAnimationFrame(animate);
   
   //SI preciona tecla arriva
@@ -55,6 +85,8 @@ function animate() {
     let rotarcarta1 = setInterval(() => {
       object.rotation.y += 0.01  
       object.position.y += 0.01  
+      object2.rotation.y -= 0.01  
+      object2.position.y -= 0.01  
       renderer.render(scene, camera);
       console.log(object.rotation)
     }, 1000/60);
@@ -69,6 +101,8 @@ function animate() {
     let rotarcarta2 = setInterval(() => {
       object.rotation.y -= 0.01  
       object.position.y -= 0.01  
+      object2.rotation.y += 0.01  
+      object2.position.y += 0.01  
       renderer.render(scene, camera);
       console.log(object.rotation)
     }, 1000/60);
