@@ -42,38 +42,12 @@ loadModel(`models/${objToRender}/scene.gltf`, scene, (gltf) => {
 
 
 
-//Controller
 
-
-
-// //Escucha cada segundo
-// loopMachine.addCallback(() => {
-// 	if (keyListener.isPressed(keyCode.ARROWUP)) {
-// 		//Iniciar
-// 		console.log("iniciar")
-//     //Iniciar
-// 		let movercarta = setInterval(() => {
-// 			console.log("MOver")
-//       object.rotation.y = -3
-//       renderer.render(scene, camera);
-// 		}, 1000/60);
-//     //Detener rotacion
-// 		setTimeout(() => {clearInterval(movercarta);},1000);
-// 	}
-// });
-
-
-// object.rotation.y = 0.4
 
 
 // Función de animación mouse
 function animate() {
   requestAnimationFrame(animate);
-  // if (object ) {
-  //   object.rotation.y = -3 + mouseX / window.innerWidth * 3;
-  //   object.rotation.x = -1.2 + mouseY * 2.5 / window.innerHeight;
-  //   // console.log(object.position, object.rotation);
-  // }
   
   //SI preciona tecla arriva
   if (keyListener.isPressed(keyCode.ARROWUP)){
