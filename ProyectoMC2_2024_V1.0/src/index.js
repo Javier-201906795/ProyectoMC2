@@ -12,8 +12,9 @@ const scene = new THREE.Scene();
 // Crear la cámara
 const camera = createCamera();
 
+//Slecciona objeto 3D a importar 
 let objToRender = 'card4';
-camera.position.z = objToRender === 'eye' ? 400 : objToRender === 'dino' ? 20 : objToRender === 'card2' ? 0.5 : 5;
+camera.position.z = 5;
 
 
 // Agregar las luces
@@ -35,7 +36,7 @@ loadModel(`models/${objToRender}/scene.gltf`, scene, (gltf) => {
   scene.add(object);
 });
 
-// Función de animación
+// Función de animación mouse
 function animate() {
   requestAnimationFrame(animate);
   if (object ) {
