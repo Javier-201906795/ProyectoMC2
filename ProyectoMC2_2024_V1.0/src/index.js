@@ -12,7 +12,7 @@ const scene = new THREE.Scene();
 // Crear la cámara
 const camera = createCamera();
 
-let objToRender = 'card2';
+let objToRender = 'card4';
 camera.position.z = objToRender === 'eye' ? 400 : objToRender === 'dino' ? 20 : objToRender === 'card2' ? 0.5 : 5;
 
 
