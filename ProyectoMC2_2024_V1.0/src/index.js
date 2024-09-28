@@ -6,6 +6,10 @@ import { addControls } from "./scene/controls.js";
 import { loadModel } from "./loaders/gltfLoader.js";
 import { addResizeListener } from "./scene/resizeListener.js";
 
+import loopMachine from "../js/controller/Loopmachine.js";
+import keyListener from "../js/controller/KeyListener.js";
+import keyCode from "../js/controller/KeyCode.js";
+
 // Crear la escena
 const scene = new THREE.Scene();
 
@@ -14,7 +18,7 @@ const camera = createCamera();
 
 //Slecciona objeto 3D a importar 
 let objToRender = 'card4';
-camera.position.z = 5;
+camera.position.z = 10;
 
 
 // Agregar las luces
@@ -36,12 +40,39 @@ loadModel(`models/${objToRender}/scene.gltf`, scene, (gltf) => {
   scene.add(object);
 });
 
+
+
+//Controller
+
+
+
+//Escucha cada segundo
+loopMachine.addCallback(() => {
+	if (keyListener.isPressed(keyCode.ARROWUP)) {
+		//Iniciar
+		console.log("iniciar")
+    //Iniciar
+		let movercarta = setInterval(() => {
+			console.log("MOver")
+      object.rotation.y = -3
+      renderer.render(scene, camera);
+		}, 1000/60);
+    //Detener rotacion
+		setTimeout(() => {clearInterval(movercarta);},1000);
+	}
+});
+
+
+
+
+
 // Función de animación mouse
 function animate() {
   requestAnimationFrame(animate);
   if (object ) {
     object.rotation.y = -3 + mouseX / window.innerWidth * 3;
     object.rotation.x = -1.2 + mouseY * 2.5 / window.innerHeight;
+    console.log(object.position, object.rotation);
   }
   renderer.render(scene, camera);
 }
@@ -59,3 +90,7 @@ addResizeListener(camera, renderer);
 
 // Iniciar la animación
 animate();
+
+//iniciar
+loopMachine.start()
+keyListener.start()

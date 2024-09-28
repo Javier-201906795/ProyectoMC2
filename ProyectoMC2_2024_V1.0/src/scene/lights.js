@@ -6,6 +6,6 @@ export function addLights(scene, objToRender) {
   topLight.castShadow = true;
   scene.add(topLight);
 
-  const ambientLight = new THREE.AmbientLight(0xDDDDDD, 1);
+  const ambientLight = new THREE.AmbientLight(0x333333, 1);
   scene.add(ambientLight);
 }
