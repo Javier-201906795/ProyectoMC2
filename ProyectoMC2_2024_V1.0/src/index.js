@@ -46,16 +46,20 @@ for (let i = 0; i < cardnumber ; i++) {
 }
 
 
-//Bandera para fograma inicial
+//Bandera  iniciales
+let velocidad = 0.5
 let flagstart = true;
 let esperar = false;
 let fase1 = false;
 let fase2 = false;
 let fase3 = false;
 let fase4 = false;
+let fase5 = false, fase6 = false;
 let grupocard1 = []
 let grupocard2 = []
 let grupocard3 = []
+let ordenvaraja = []
+
 
 //##############################################################################
 //Funciones ayudantes
@@ -243,7 +247,7 @@ function animate() {
           if (fase4){
             document.getElementById("title").innerHTML = "Precione la tecla M";
           }
-        },2000);
+        },2000*velocidad);
       }
     }
     
@@ -294,16 +298,16 @@ function animate() {
           console.log("Grupo1",grupocard1)
           console.log("Grupo2",grupocard2)
           console.log("Grupo3",grupocard3)
-        },1000);
+        },1000*velocidad);
       }
     }
 
 
     if (keyListener.isPressed(keyCode.ONE)){
       console.log("fase1",fase1,"fase2",fase2,"fase3",fase3, "fase 4", fase4)
-      if (fase1 == true && fase2 == true && fase3 == true && fase4 == false){
+      if (fase1 == true && fase2 == true && fase3 == true && fase4 == false && fase5 == false){
         //Repartir cartas
-        let grupo1 = setInterval(() => {
+        let agrupar = setInterval(() => {
           let contx = 0
           let conty = 0
           let contz = 0
@@ -318,7 +322,6 @@ function animate() {
             conty += 0.1
             contx += 0.1
             contz += 0.1
-            console.log("abajo",contx,conty,contz)
           }
           //[APILAR CARTAS GRUPO MEDIO]
           //obteniendo ultima posicion para empezar
@@ -327,7 +330,6 @@ function animate() {
           conty = ultimacarta.position.y + 1
           contz = ultimacarta.position.z + 0.1
           for (let i = 0; i < grupocard1.length ; i++) {
-            console.log("medio",contx,conty,contz)
             //mover hacie el centro
             let carta = objects[grupocard1[i]]
             carta.position.y = conty + i*0.25
@@ -345,7 +347,6 @@ function animate() {
           conty = ultimacarta2.position.y + 1
           contz = ultimacarta2.position.z + 0.1
           for (let i = 0; i < grupocard3.length ; i++) {
-            console.log("medio",contx,conty,contz)
             //mover hacie el centro
             let carta = objects[grupocard3[i]]
             carta.position.y = conty + i*0.25
@@ -360,14 +361,89 @@ function animate() {
         }, 1000/60)
         //Detiene en tiempo determinado
         setTimeout(() => {
-          clearInterval(grupo1);
-          document.getElementById("title").innerHTML = "Presione Enter";
+          clearInterval(agrupar);
+          document.getElementById("title").innerHTML = "..Presione Enter";
           fase4 = true
           fase1 = false
-        },2000);
+          //Almacenar orden varaja
+          let cont = 0
+          //grupo inferior
+          for (let i = 0; i < grupocard2.length ; i++) {
+            ordenvaraja[cont] = grupocard2[i]
+            cont +=1
+          }
+          //grupo medio
+          for (let i = 0; i < grupocard1.length ; i++) {
+            ordenvaraja[cont] = grupocard1[i]
+            cont +=1
+          }
+          //grupo superior
+          for (let i = 0; i < grupocard3.length ; i++) {
+            ordenvaraja[cont] = grupocard3[i]
+            cont +=1
+          }
+          console.log("ordenvaraja",ordenvaraja)
+          //Limpiar grupos
+          grupocard1 = []
+          grupocard2 = []
+          grupocard3 = []
+           
+        },2000*velocidad);
       }
     }
 
+    if (keyListener.isPressed(keyCode.LETTERM)){
+      console.log("fase1",fase1,"fase2",fase2,"fase3",fase3, "fase 4", fase4, "fase5",fase5)
+      if (fase1 == true && fase2 == true && fase3 == true && fase4 == true && fase5 == false){
+        //Repartir cartas
+        let creargrupos = setInterval(() => {
+          let cont = 0
+          let conty = -3
+          let contz = 0
+          for (let i = 0; i < ordenvaraja.length ; i++) {
+            cont += 1
+            let carta = objects[ordenvaraja[i]]
+            //Voltear cartas
+            carta.rotation.y = 0 
+            if (cont == 1){
+              carta.position.x = -3
+              carta.position.y = conty
+              carta.position.z = contz
+              addgrupocard1(objects[ordenvaraja[i]])
+            }
+            if (cont == 2){
+              carta.position.x = 0
+              carta.position.y = conty
+              carta.position.z = contz
+              addgrupocard2(objects[ordenvaraja[i]])
+            }
+            if (cont == 3){
+              carta.position.x = 3
+              carta.position.y = conty
+              carta.position.z = contz
+              addgrupocard3(objects[ordenvaraja[i]])
+            }
+            //ciclos de 3
+            if (cont >= 3){ cont = 0; conty += 1 ; contz += 0.3}
+          }
+          
+          renderer.render(scene, camera);
+        }, 1000/60)
+        //Detiene en tiempo determinado
+        setTimeout(() => {
+          clearInterval(creargrupos);
+          document.getElementById("title").innerHTML = "2| En que grupo esta? 1,2,3";
+          fase6 = true
+          console.log(grupocard1, grupocard2, grupocard3)
+          fase1 = true 
+          fase2 = true 
+          fase3 = true
+          fase4 = false
+          fase5 = false
+
+        },3000*velocidad);
+      }
+    }
 
     //SI preciona tecla arriva
     if (keyListener.isPressed(keyCode.ARROWUP)){

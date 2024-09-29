@@ -7,7 +7,8 @@ let keyCode = {
     KEYI: 73,
     ONE: 97,
     TWO: 98,
-    THREE: 99
+    THREE: 99,
+    LETTERM: 77,
 }
 
 
