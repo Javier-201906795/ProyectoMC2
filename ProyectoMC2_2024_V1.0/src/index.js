@@ -30,22 +30,14 @@ const renderer = createRenderer();
 document.getElementById("container3D").appendChild(renderer.domElement);
 
 //Cartas 3D
-let objToRender = 'collectioncards/card1';
 let object;
-let object2, object3;
-
-let cardnumber = 2
-
-let objects = [object,object2,object3]
-
-// // Cargar el modelo GLTF
-// loadModel(`models/${objToRender}/scene.gltf`, scene, (gltf) => {
-//   object = gltf.scene;
-//   scene.add(object);
-// });
+let object2, object3, object4, object5, object6, object7, object8, object9, object10, object11, object12, object13, object14, object15;
+let objects = [object,object2,object3, object4,object5,object6,object7,object8,object9,object10,object11,object12,object13,object14,object15]
+//Numero de cartas
+let cardnumber = 9
 
 //Ciclo para cargar Cartas
-for (let i = 0; i <= cardnumber ; i++) {
+for (let i = 0; i < cardnumber ; i++) {
   // Cargar el modelo GLTF3
   loadModel(`models/collectioncards/card${i+1}/scene.gltf`, scene, (gltf) => {
     objects[i] = gltf.scene;
@@ -53,37 +45,45 @@ for (let i = 0; i <= cardnumber ; i++) {
   });
 }
 
-// // Cargar el modelo GLTF3
-// loadModel(`models/collectioncards/card02/scene.gltf`, scene, (gltf) => {
-//   objects[1] = gltf.scene;
-//   scene.add(objects[1]);
-// });
-
-
-
-
-// // Cargar el modelo GLTF3
-// loadModel(`models/collectioncards/card03/scene.gltf`, scene, (gltf) => {
-//   object3 = gltf.scene;
-//   scene.add(object3);
-// });
-
-
-
-
 
 //Bandera para fograma inicial
 let flagstart = true;
 
-// Función de animación mouse
+// Función de animación se activa cada segundo
 function animate() {
   //render inicial
   if(objects[0]){
     if (flagstart){
-      objects[0].position.y = 0
-      objects[1].position.x = 3
-      objects[2].position.x = -3
-      renderer.render(scene, camera);
+      //numero de cartas
+      if (cardnumber == 3){
+        objects[0].position.x = -3
+        objects[1].position.x = 0
+        objects[2].position.x = 3
+        renderer.render(scene, camera);
+      }
+      if (cardnumber == 9){
+        objects[0].position.x = -3
+        objects[1].position.x = 0
+        objects[2].position.x = 3
+        objects[3].position.x = -3
+        objects[4].position.x = 0
+        objects[5].position.x = 3
+        objects[6].position.x = -3
+        objects[7].position.x = 0
+        objects[8].position.x = 3
+        // //posicion y
+        objects[0].position.y = 4
+        objects[1].position.y = 4
+        objects[2].position.y = 4
+        objects[3].position.y = 0
+        objects[4].position.y = 0
+        objects[5].position.y = 0
+        objects[6].position.y = -4
+        objects[7].position.y = -4
+        objects[8].position.y = -4
+        renderer.render(scene, camera);
+      }
+
       flagstart = false;
     }
   }
@@ -124,20 +124,11 @@ function animate() {
 }
 
 
-
-// // Listener para el movimiento del ratón
-// document.onmousemove = (e) => {
-//   mouseX = e.clientX;
-//   mouseY = e.clientY;
-// };
-
 // Añadir el listener para redimensionar la ventana
 addResizeListener(camera, renderer);
 
 // Iniciar la animación
 animate();
-
-
 
 
 //iniciar
