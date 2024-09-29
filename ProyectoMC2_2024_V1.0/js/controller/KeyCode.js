@@ -4,7 +4,10 @@ let keyCode = {
     BACKSPACE: 8,
     ARROWDOWN: 40,
     ARROWUP: 38,
-    KEYI: 73
+    KEYI: 73,
+    ONE: 97,
+    TWO: 98,
+    THREE: 99
 }
 
 

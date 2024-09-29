@@ -51,6 +51,86 @@ let flagstart = true;
 let esperar = false;
 let fase1 = false;
 let fase2 = false;
+let fase3 = false;
+let grupocard1 = []
+let grupocard2 = []
+let grupocard3 = []
+
+//##############################################################################
+//Funciones ayudantes
+function addgrupocard1(objeto){
+  let flag = false
+  //obtien index del objeto
+  let index = objects.findIndex(x => x == objeto)
+  
+  // Verifica si grupocard1 no está vacío antes de entrar al bucle
+  if (grupocard1.length > 0) {
+    for (let i = 0; i <= grupocard1.length; i++) {
+        // Verifica que grupocard1[i] y su propiedad parent existan antes de acceder a uuid
+        if (grupocard1[i] === index) {
+            flag = true;
+            break;  // Si encuentra coincidencia, termina el bucle
+        }
+    }
+  }
+  // Si no se encuentra coincidencia, agrega el objeto
+  if (!flag) {
+    //Solo en index en el array central
+    
+    grupocard1.push(index);
+  }
+}
+
+function addgrupocard2(objeto){
+  let flag = false
+  //obtien index del objeto
+  let index = objects.findIndex(x => x == objeto)
+  
+  // Verifica si grupocard1 no está vacío antes de entrar al bucle
+  if (grupocard2.length > 0) {
+    for (let i = 0; i <= grupocard2.length; i++) {
+        // Verifica que grupocard1[i] y su propiedad parent existan antes de acceder a uuid
+        if (grupocard2[i] === index) {
+            flag = true;
+            break;  // Si encuentra coincidencia, termina el bucle
+        }
+    }
+  }
+  // Si no se encuentra coincidencia, agrega el objeto
+  if (!flag) {
+    //Solo en index en el array central
+    
+    grupocard2.push(index);
+  }
+}
+
+
+function addgrupocard3(objeto){
+  let flag = false
+  //obtien index del objeto
+  let index = objects.findIndex(x => x == objeto)
+  
+  // Verifica si grupocard1 no está vacío antes de entrar al bucle
+  if (grupocard3.length > 0) {
+    for (let i = 0; i <= grupocard3.length; i++) {
+        // Verifica que grupocard1[i] y su propiedad parent existan antes de acceder a uuid
+        if (grupocard3[i] === index) {
+            flag = true;
+            break;  // Si encuentra coincidencia, termina el bucle
+        }
+    }
+  }
+  // Si no se encuentra coincidencia, agrega el objeto
+  if (!flag) {
+    //Solo en index en el array central
+    
+    grupocard3.push(index);
+  }
+}
+//##############################################################################
+
+
+
 
 // Función de animación se activa cada segundo
 function animate() {
@@ -133,7 +213,7 @@ function animate() {
           renderer.render(scene, camera);
         }, 1000/60);
         //Detiene en tiempo determinado
-        setTimeout(() => {clearInterval(voltear9);},2000);
+        setTimeout(() => {clearInterval(voltear9);},3000);
         
         //Juntarlas
         let juntar9 = setInterval(() => {
@@ -159,7 +239,7 @@ function animate() {
           fase1 = true;
           console.log("fase1", fase1)
           document.getElementById("title").innerHTML = "Precione la tecla I";
-        },2000);
+        },3000);
       }
     }
     
@@ -182,16 +262,19 @@ function animate() {
               objects[i].position.x = -3
               objects[i].position.y = conty
               objects[i].position.z = contz
+              addgrupocard1(objects[i])
             }
             if (cont == 2){
               objects[i].position.x = 0
               objects[i].position.y = conty
               objects[i].position.z = contz
+              addgrupocard2(objects[i])
             }
             if (cont == 3){
               objects[i].position.x = 3
               objects[i].position.y = conty
               objects[i].position.z = contz
+              addgrupocard3(objects[i])
             }
             //ciclos de 3
             if (cont >= 3){ cont = 0; conty += 1 ; contz += 0.3}
@@ -204,7 +287,41 @@ function animate() {
         setTimeout(() => {
           clearInterval(repartir);
           document.getElementById("title").innerHTML = "En que grupo esta? 1, 2, 3";
-        },5000);
+          fase2 = true
+          console.log("Grupo1",grupocard1)
+          console.log("Grupo2",grupocard2)
+          console.log("Grupo3",grupocard3)
+          //mover carta
+          console.log(objects[grupocard1[0]].position.x)
+          objects[grupocard1[0]].position.y = -5
+          renderer.render(scene, camera);
+        },3000);
+      }
+    }
+
+
+    if (keyListener.isPressed(keyCode.ONE)){
+      console.log("estado fase2",fase2)
+      if (fase1 == true && fase2 == true && fase3 == false){
+        //Repartir cartas
+        let grupo1 = setInterval(() => {
+          let cont = 0
+          //Apilar
+          for (let i = 0; i < cardnumber ; i++) {
+            cont += 1
+            
+            //ciclos de 3
+            if (cont >= 3){ cont = 0;}              
+          }
+          
+          renderer.render(scene, camera);
+        }, 1000/60)
+        //Detiene en tiempo determinado
+        setTimeout(() => {
+          clearInterval(grupo1);
+          document.getElementById("title").innerHTML = "Ok";
+          fase2 = true
+        },3000);
       }
     }
 
