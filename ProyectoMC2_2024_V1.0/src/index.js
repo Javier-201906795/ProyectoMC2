@@ -18,44 +18,55 @@ const scene = new THREE.Scene();
 const camera = createCamera();
 
 //Slecciona objeto 3D a importar 
-let objToRender = 'collectioncards/card01';
+
 camera.position.z = 10;
 
 
 // Agregar las luces
-addLights(scene, objToRender);
+addLights(scene);
 
 // Crear el renderizador y agregarlo al DOM
 const renderer = createRenderer();
 document.getElementById("container3D").appendChild(renderer.domElement);
 
-
-// Variables para el movimiento del ojo
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
+//Cartas 3D
+let objToRender = 'collectioncards/card1';
 let object;
+let object2, object3;
 
-// Cargar el modelo GLTF
-loadModel(`models/${objToRender}/scene.gltf`, scene, (gltf) => {
-  object = gltf.scene;
-  scene.add(object);
-});
+let cardnumber = 2
 
-let object2
-// Cargar el modelo GLTF3
-loadModel(`models/collectioncards/card02/scene.gltf`, scene, (gltf) => {
-  object2 = gltf.scene;
-  scene.add(object2);
-});
+let objects = [object,object2,object3]
+
+// // Cargar el modelo GLTF
+// loadModel(`models/${objToRender}/scene.gltf`, scene, (gltf) => {
+//   object = gltf.scene;
+//   scene.add(object);
+// });
+
+//Ciclo para cargar Cartas
+for (let i = 0; i <= cardnumber ; i++) {
+  // Cargar el modelo GLTF3
+  loadModel(`models/collectioncards/card${i+1}/scene.gltf`, scene, (gltf) => {
+    objects[i] = gltf.scene;
+    scene.add(objects[i]);
+  });
+}
+
+// // Cargar el modelo GLTF3
+// loadModel(`models/collectioncards/card02/scene.gltf`, scene, (gltf) => {
+//   objects[1] = gltf.scene;
+//   scene.add(objects[1]);
+// });
 
 
 
-let object3
-// Cargar el modelo GLTF3
-loadModel(`models/collectioncards/card03/scene.gltf`, scene, (gltf) => {
-  object3 = gltf.scene;
-  scene.add(object3);
-});
+
+// // Cargar el modelo GLTF3
+// loadModel(`models/collectioncards/card03/scene.gltf`, scene, (gltf) => {
+//   object3 = gltf.scene;
+//   scene.add(object3);
+// });
 
 
 
@@ -67,11 +78,11 @@ let flagstart = true;
 // Función de animación mouse
 function animate() {
   //render inicial
-  if(object){
+  if(objects[0]){
     if (flagstart){
-      object.position.y = 0
-      object2.position.x = 3
-      object3.position.x = -3
+      objects[0].position.y = 0
+      objects[1].position.x = 3
+      objects[2].position.x = -3
       renderer.render(scene, camera);
       flagstart = false;
     }
@@ -85,12 +96,11 @@ function animate() {
   if (keyListener.isPressed(keyCode.ARROWUP)){
     //rotar a 60 fps
     let rotarcarta1 = setInterval(() => {
-      object.rotation.y += 0.01  
-      object.position.y += 0.01  
-      object2.rotation.y -= 0.01  
-      object2.position.y -= 0.01  
+      objects[0].rotation.y += 0.01  
+      objects[0].position.y += 0.01  
+      objects[1].rotation.y -= 0.01  
+      objects[1].position.y -= 0.01  
       renderer.render(scene, camera);
-      console.log(object.rotation)
     }, 1000/60);
     //Detiene en tiempo determinado
     setTimeout(() => {clearInterval(rotarcarta1);},1000);
@@ -101,12 +111,11 @@ function animate() {
   if (keyListener.isPressed(keyCode.ARROWDOWN)){
     //rotar a 60 fps
     let rotarcarta2 = setInterval(() => {
-      object.rotation.y -= 0.01  
-      object.position.y -= 0.01  
-      object2.rotation.y += 0.01  
-      object2.position.y += 0.01  
+      objects[0].rotation.y -= 0.01  
+      objects[0].position.y -= 0.01  
+      objects[1].rotation.y += 0.01  
+      objects[1].position.y += 0.01  
       renderer.render(scene, camera);
-      console.log(object.rotation)
     }, 1000/60);
     //Detiene en tiempo determinado
     setTimeout(() => {clearInterval(rotarcarta2);},1000);
@@ -116,11 +125,11 @@ function animate() {
 
 
 
-// Listener para el movimiento del ratón
-document.onmousemove = (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-};
+// // Listener para el movimiento del ratón
+// document.onmousemove = (e) => {
+//   mouseX = e.clientX;
+//   mouseY = e.clientY;
+// };
 
 // Añadir el listener para redimensionar la ventana
 addResizeListener(camera, renderer);
