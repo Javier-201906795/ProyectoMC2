@@ -18,7 +18,7 @@ const scene = new THREE.Scene();
 const camera = createCamera();
 
 //Slecciona objeto 3D a importar 
-let objToRender = 'card5';
+let objToRender = 'collectioncards/card01';
 camera.position.z = 10;
 
 
@@ -41,29 +41,18 @@ loadModel(`models/${objToRender}/scene.gltf`, scene, (gltf) => {
   scene.add(object);
 });
 
-
-// Cargar el modelo GLTF2
-const loader2 = new GLTFLoader();
-let path2 = "models/card4/scene.gltf"
 let object2
-loader2.load(
-  path2,
-  function (gltf) {
-    object2 = gltf.scene;
-    scene.add(object2);  
-  },
-  function (xhr) {
-    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-  },
-  function (error) {
-    console.error(error);
-  }
-);
+// Cargar el modelo GLTF3
+loadModel(`models/collectioncards/card02/scene.gltf`, scene, (gltf) => {
+  object2 = gltf.scene;
+  scene.add(object2);
+});
+
 
 
 let object3
 // Cargar el modelo GLTF3
-loadModel(`models/card4/scene.gltf`, scene, (gltf) => {
+loadModel(`models/collectioncards/card03/scene.gltf`, scene, (gltf) => {
   object3 = gltf.scene;
   scene.add(object3);
 });
