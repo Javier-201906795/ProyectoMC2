@@ -52,6 +52,7 @@ let esperar = false;
 let fase1 = false;
 let fase2 = false;
 let fase3 = false;
+let fase4 = false;
 let grupocard1 = []
 let grupocard2 = []
 let grupocard3 = []
@@ -239,7 +240,10 @@ function animate() {
           fase1 = true;
           console.log("fase1", fase1)
           document.getElementById("title").innerHTML = "Precione la tecla I";
-        },3000);
+          if (fase4){
+            document.getElementById("title").innerHTML = "Precione la tecla M";
+          }
+        },2000);
       }
     }
     
@@ -278,9 +282,7 @@ function animate() {
             }
             //ciclos de 3
             if (cont >= 3){ cont = 0; conty += 1 ; contz += 0.3}
-            
           }
-          
           renderer.render(scene, camera);
         }, 1000/60)
         //Detiene en tiempo determinado
@@ -288,40 +290,81 @@ function animate() {
           clearInterval(repartir);
           document.getElementById("title").innerHTML = "En que grupo esta? 1, 2, 3";
           fase2 = true
+          fase3 = true
           console.log("Grupo1",grupocard1)
           console.log("Grupo2",grupocard2)
           console.log("Grupo3",grupocard3)
-          //mover carta
-          console.log(objects[grupocard1[0]].position.x)
-          objects[grupocard1[0]].position.y = -5
-          renderer.render(scene, camera);
-        },3000);
+        },1000);
       }
     }
 
 
     if (keyListener.isPressed(keyCode.ONE)){
-      console.log("estado fase2",fase2)
-      if (fase1 == true && fase2 == true && fase3 == false){
+      console.log("fase1",fase1,"fase2",fase2,"fase3",fase3, "fase 4", fase4)
+      if (fase1 == true && fase2 == true && fase3 == true && fase4 == false){
         //Repartir cartas
         let grupo1 = setInterval(() => {
-          let cont = 0
-          //Apilar
-          for (let i = 0; i < cardnumber ; i++) {
-            cont += 1
-            
-            //ciclos de 3
-            if (cont >= 3){ cont = 0;}              
+          let contx = 0
+          let conty = 0
+          let contz = 0
+          //[APILAR CARTAS GRUPO INFERIOR]
+          for (let i = 0; i < grupocard2.length ; i++) {
+            //mover hacie el centro
+            let carta = objects[grupocard2[i]]
+            carta.position.y = (conty-4) + i*0.25
+            carta.position.x = contx 
+            carta.position.z = contz + i*0.25
+            //contador
+            conty += 0.1
+            contx += 0.1
+            contz += 0.1
+            console.log("abajo",contx,conty,contz)
           }
-          
+          //[APILAR CARTAS GRUPO MEDIO]
+          //obteniendo ultima posicion para empezar
+          let ultimacarta = objects[grupocard2[grupocard2.length-1]]
+          contx = ultimacarta.position.x + 0.1
+          conty = ultimacarta.position.y + 1
+          contz = ultimacarta.position.z + 0.1
+          for (let i = 0; i < grupocard1.length ; i++) {
+            console.log("medio",contx,conty,contz)
+            //mover hacie el centro
+            let carta = objects[grupocard1[i]]
+            carta.position.y = conty + i*0.25
+            carta.position.x = contx 
+            carta.position.z = contz + i*0.25
+            //contador
+            conty += 0.1
+            contx += 0.1
+            contz += 0.1
+          }
+          //[APILAR CARTAS GRUPO SUPERIOR]
+          //obteniendo ultima posicion para empezar
+          let ultimacarta2 = objects[grupocard1[grupocard2.length-1]]
+          contx = ultimacarta2.position.x + 0.1
+          conty = ultimacarta2.position.y + 1
+          contz = ultimacarta2.position.z + 0.1
+          for (let i = 0; i < grupocard3.length ; i++) {
+            console.log("medio",contx,conty,contz)
+            //mover hacie el centro
+            let carta = objects[grupocard3[i]]
+            carta.position.y = conty + i*0.25
+            carta.position.x = contx 
+            carta.position.z = contz + i*0.25
+            //contador
+            conty += 0.1
+            contx += 0.1
+            contz += 0.1
+          }
           renderer.render(scene, camera);
         }, 1000/60)
         //Detiene en tiempo determinado
         setTimeout(() => {
           clearInterval(grupo1);
-          document.getElementById("title").innerHTML = "Ok";
-          fase2 = true
-        },3000);
+          document.getElementById("title").innerHTML = "Presione Enter";
+          fase4 = true
+          fase1 = false
+        },2000);
       }
     }
 
