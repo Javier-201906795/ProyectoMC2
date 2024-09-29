@@ -85,12 +85,58 @@ function animate() {
       }
 
       flagstart = false;
+
+      document.getElementById("title").innerHTML = "Escoge tu carta y memorice su carta.";
     }
   }
   
 
 
   requestAnimationFrame(animate);
+
+ 
+
+  //[EMPEZAR]
+  let esperar = false;
+  //Escucha la tecla ENTER
+  if (keyListener.isPressed(keyCode.ENTER)) {
+    //Voltear cartas
+    let voltear9 = setInterval(() => {
+      esperar = true
+      //voltear todas las cartas
+      for (let i = 0; i < cardnumber ; i++) {
+        if (parseFloat(objects[i].rotation.y) < Math.PI){
+          objects[i].rotation.y += 0.05
+        }else{
+          esperar = false
+        }
+      }
+      renderer.render(scene, camera);
+    }, 1000/60);
+    //Detiene en tiempo determinado
+    setTimeout(() => {clearInterval(voltear9);},2000);
+    
+    //Juntarlas
+    let juntar9 = setInterval(() => {
+      if (!esperar){
+        for (let i = 0; i < cardnumber ; i++) {
+          //mover hacia la arriva
+          if (parseFloat(objects[i].position.y) <= 4){
+            objects[i].position.y += 0.03
+          }
+          //mover hacia la derecha
+          if (parseFloat(objects[i].position.x) >= -3){
+            objects[i].position.x -= 0.03
+          }
+        }
+      }
+      renderer.render(scene, camera);
+    }, 1000/60);
+    //Detiene en tiempo determinado
+    setTimeout(() => {clearInterval(juntar9);},2000);
+
+    setTimeout(() => {console.log("dos segundos")},2000);
+  }
   
   //SI preciona tecla arriva
   if (keyListener.isPressed(keyCode.ARROWUP)){
