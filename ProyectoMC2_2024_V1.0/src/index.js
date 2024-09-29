@@ -50,6 +50,7 @@ for (let i = 0; i < cardnumber ; i++) {
 let flagstart = true;
 let esperar = false;
 let fase1 = false;
+let fase2 = false;
 
 // Función de animación se activa cada segundo
 function animate() {
@@ -117,59 +118,55 @@ function animate() {
     
     //Escucha la tecla ENTER
     if (keyListener.isPressed(keyCode.ENTER)) {
-      //Voltear cartas
-      let voltear9 = setInterval(() => {
-        esperar = true
-        //voltear todas las cartas
-        for (let i = 0; i < cardnumber ; i++) {
-          if (parseFloat(objects[i].rotation.y) < Math.PI){
-            objects[i].rotation.y += 0.05
-          }else{
+      if (!fase1){
+        //Voltear cartas
+        let voltear9 = setInterval(() => {
+          esperar = true
+          //voltear todas las cartas
+          for (let i = 0; i < cardnumber ; i++) {
+            if (parseFloat(objects[i].rotation.y) < Math.PI){
+              objects[i].rotation.y += 0.05
+            }else{
+              esperar = false
+            }
+          }
+          renderer.render(scene, camera);
+        }, 1000/60);
+        //Detiene en tiempo determinado
+        setTimeout(() => {clearInterval(voltear9);},2000);
+        
+        //Juntarlas
+        let juntar9 = setInterval(() => {
+          if (!esperar){
+            esperar = true
+            for (let i = 0; i < cardnumber ; i++) {
+              //mover hacia la arriva
+              if (parseFloat(objects[i].position.y) <= 4){
+                objects[i].position.y += 0.03
+              }
+              //mover hacia la derecha
+              if (parseFloat(objects[i].position.x) >= -3){
+                objects[i].position.x -= 0.03
+              }
+            }
             esperar = false
           }
-        }
-        renderer.render(scene, camera);
-      }, 1000/60);
-      //Detiene en tiempo determinado
-      setTimeout(() => {clearInterval(voltear9);},2000);
-      
-      //Juntarlas
-      let juntar9 = setInterval(() => {
-        if (!esperar){
-          esperar = true
-          for (let i = 0; i < cardnumber ; i++) {
-            //mover hacia la arriva
-            if (parseFloat(objects[i].position.y) <= 4){
-              objects[i].position.y += 0.03
-            }
-            //mover hacia la derecha
-            if (parseFloat(objects[i].position.x) >= -3){
-              objects[i].position.x -= 0.03
-            }
-          }
-          esperar = false
-        }
-        renderer.render(scene, camera);
-      }, 1000/60);
-      //Detiene en tiempo determinado
-      setTimeout(() => {
-        clearInterval(juntar9);
-        fase1 = true;
-        console.log("fase1", fase1)
-        document.getElementById("title").innerHTML = "Precione la tecla I";
-        
-      },2000);
-
-      
-
-      
-      
+          renderer.render(scene, camera);
+        }, 1000/60);
+        //Detiene en tiempo determinado
+        setTimeout(() => {
+          clearInterval(juntar9);
+          fase1 = true;
+          console.log("fase1", fase1)
+          document.getElementById("title").innerHTML = "Precione la tecla I";
+        },2000);
+      }
     }
     
 
     if (keyListener.isPressed(keyCode.KEYI)){
       console.log("estado fase1",fase1)
-      if (fase1){
+      if (fase1 == true && fase2 == false){
         //Repartir cartas
         let repartir = setInterval(() => {
           
@@ -204,7 +201,10 @@ function animate() {
           renderer.render(scene, camera);
         }, 1000/60)
         //Detiene en tiempo determinado
-        setTimeout(() => {clearInterval(repartir);},5000);
+        setTimeout(() => {
+          clearInterval(repartir);
+          document.getElementById("title").innerHTML = "En que grupo esta? 1, 2, 3";
+        },5000);
       }
     }
 
