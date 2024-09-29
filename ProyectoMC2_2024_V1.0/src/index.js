@@ -48,11 +48,24 @@ for (let i = 0; i < cardnumber ; i++) {
 
 //Bandera para fograma inicial
 let flagstart = true;
+let esperar = false;
+let fase1 = false;
 
 // Función de animación se activa cada segundo
 function animate() {
+
+  //Esperar a que cargen todos las cartas 3D
+  let objetoscargados = false;
+  for (let i = 0; i < cardnumber ; i++) {
+    if (objects[i]){
+      objetoscargados = true;
+    }else{
+      objetoscargados = false;
+    }
+  }
+
   //render inicial
-  if(objects[0]){
+  if(objetoscargados){
     if (flagstart){
       //numero de cartas
       if (cardnumber == 3){
@@ -95,78 +108,136 @@ function animate() {
   requestAnimationFrame(animate);
 
  
+  
 
-  //[EMPEZAR]
-  let esperar = false;
-  //Escucha la tecla ENTER
-  if (keyListener.isPressed(keyCode.ENTER)) {
-    //Voltear cartas
-    let voltear9 = setInterval(() => {
-      esperar = true
-      //voltear todas las cartas
-      for (let i = 0; i < cardnumber ; i++) {
-        if (parseFloat(objects[i].rotation.y) < Math.PI){
-          objects[i].rotation.y += 0.05
-        }else{
+
+  if(objetoscargados){
+    
+    //[EMPEZAR]
+    
+    //Escucha la tecla ENTER
+    if (keyListener.isPressed(keyCode.ENTER)) {
+      //Voltear cartas
+      let voltear9 = setInterval(() => {
+        esperar = true
+        //voltear todas las cartas
+        for (let i = 0; i < cardnumber ; i++) {
+          if (parseFloat(objects[i].rotation.y) < Math.PI){
+            objects[i].rotation.y += 0.05
+          }else{
+            esperar = false
+          }
+        }
+        renderer.render(scene, camera);
+      }, 1000/60);
+      //Detiene en tiempo determinado
+      setTimeout(() => {clearInterval(voltear9);},2000);
+      
+      //Juntarlas
+      let juntar9 = setInterval(() => {
+        if (!esperar){
+          esperar = true
+          for (let i = 0; i < cardnumber ; i++) {
+            //mover hacia la arriva
+            if (parseFloat(objects[i].position.y) <= 4){
+              objects[i].position.y += 0.03
+            }
+            //mover hacia la derecha
+            if (parseFloat(objects[i].position.x) >= -3){
+              objects[i].position.x -= 0.03
+            }
+          }
           esperar = false
         }
-      }
-      renderer.render(scene, camera);
-    }, 1000/60);
-    //Detiene en tiempo determinado
-    setTimeout(() => {clearInterval(voltear9);},2000);
+        renderer.render(scene, camera);
+      }, 1000/60);
+      //Detiene en tiempo determinado
+      setTimeout(() => {
+        clearInterval(juntar9);
+        fase1 = true;
+        console.log("fase1", fase1)
+        document.getElementById("title").innerHTML = "Precione la tecla I";
+        
+      },2000);
+
+      
+
+      
+      
+    }
     
-    //Juntarlas
-    let juntar9 = setInterval(() => {
-      if (!esperar){
-        for (let i = 0; i < cardnumber ; i++) {
-          //mover hacia la arriva
-          if (parseFloat(objects[i].position.y) <= 4){
-            objects[i].position.y += 0.03
+
+    if (keyListener.isPressed(keyCode.KEYI)){
+      console.log("estado fase1",fase1)
+      if (fase1){
+        //Repartir cartas
+        let repartir = setInterval(() => {
+          
+          let cont = 0
+          let conty = -3
+          let contz = 0
+          for (let i = 0; i < cardnumber ; i++) {
+            cont += 1
+            //Voltear cartas
+            objects[i].rotation.y = 0 
+
+            if (cont == 1){
+              objects[i].position.x = -3
+              objects[i].position.y = conty
+              objects[i].position.z = contz
+            }
+            if (cont == 2){
+              objects[i].position.x = 0
+              objects[i].position.y = conty
+              objects[i].position.z = contz
+            }
+            if (cont == 3){
+              objects[i].position.x = 3
+              objects[i].position.y = conty
+              objects[i].position.z = contz
+            }
+            //ciclos de 3
+            if (cont >= 3){ cont = 0; conty += 1 ; contz += 0.3}
+            
           }
-          //mover hacia la derecha
-          if (parseFloat(objects[i].position.x) >= -3){
-            objects[i].position.x -= 0.03
-          }
-        }
+          
+          renderer.render(scene, camera);
+        }, 1000/60)
+        //Detiene en tiempo determinado
+        setTimeout(() => {clearInterval(repartir);},5000);
       }
-      renderer.render(scene, camera);
-    }, 1000/60);
-    //Detiene en tiempo determinado
-    setTimeout(() => {clearInterval(juntar9);},2000);
-
-    setTimeout(() => {console.log("dos segundos")},2000);
-  }
-  
-  //SI preciona tecla arriva
-  if (keyListener.isPressed(keyCode.ARROWUP)){
-    //rotar a 60 fps
-    let rotarcarta1 = setInterval(() => {
-      objects[0].rotation.y += 0.01  
-      objects[0].position.y += 0.01  
-      objects[1].rotation.y -= 0.01  
-      objects[1].position.y -= 0.01  
-      renderer.render(scene, camera);
-    }, 1000/60);
-    //Detiene en tiempo determinado
-    setTimeout(() => {clearInterval(rotarcarta1);},1000);
-  }
+    }
 
 
-  //SI preciona tecla arriva
-  if (keyListener.isPressed(keyCode.ARROWDOWN)){
-    //rotar a 60 fps
-    let rotarcarta2 = setInterval(() => {
-      objects[0].rotation.y -= 0.01  
-      objects[0].position.y -= 0.01  
-      objects[1].rotation.y += 0.01  
-      objects[1].position.y += 0.01  
-      renderer.render(scene, camera);
-    }, 1000/60);
-    //Detiene en tiempo determinado
-    setTimeout(() => {clearInterval(rotarcarta2);},1000);
+    //SI preciona tecla arriva
+    if (keyListener.isPressed(keyCode.ARROWUP)){
+      //rotar a 60 fps
+      let rotarcarta1 = setInterval(() => {
+        objects[0].rotation.y += 0.01  
+        objects[0].position.y += 0.01  
+        objects[1].rotation.y -= 0.01  
+        objects[1].position.y -= 0.01  
+        renderer.render(scene, camera);
+      }, 1000/60);
+      //Detiene en tiempo determinado
+      setTimeout(() => {clearInterval(rotarcarta1);},1000);
+    }
+
+
+    //SI preciona tecla arriva
+    if (keyListener.isPressed(keyCode.ARROWDOWN)){
+      //rotar a 60 fps
+      let rotarcarta2 = setInterval(() => {
+        objects[0].rotation.y -= 0.01  
+        objects[0].position.y -= 0.01  
+        objects[1].rotation.y += 0.01  
+        objects[1].position.y += 0.01  
+        renderer.render(scene, camera);
+      }, 1000/60);
+      //Detiene en tiempo determinado
+      setTimeout(() => {clearInterval(rotarcarta2);},1000);
+    }
   }
-  
 }
 
 

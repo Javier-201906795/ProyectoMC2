@@ -3,7 +3,8 @@ let keyCode = {
     SCAPE: 32,
     BACKSPACE: 8,
     ARROWDOWN: 40,
-    ARROWUP: 38
+    ARROWUP: 38,
+    KEYI: 73
 }
 
 
