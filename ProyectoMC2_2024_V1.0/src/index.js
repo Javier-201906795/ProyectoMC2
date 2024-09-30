@@ -133,7 +133,7 @@ function cartaadivinar(){
 function final(){
   //obtener numero de carta
   let cartaseleccionada = cartaadivinar()
-  console.log(cartaseleccionada)
+  console.log("final",cartaseleccionada)
 }
 
 //##############################################################################
@@ -151,7 +151,7 @@ let grupocard1 = []
 let grupocard2 = []
 let grupocard3 = []
 let ordenvaraja = []
-let maximonumerodelanzamientos = funcionnumerodelanzamientos(cardnumber) + 1;
+let maximonumerodelanzamientos = funcionnumerodelanzamientos(cardnumber);
 let numerodelanzamientos = 0
 let numerodelanzamientos2 = 0
 let banderlanzamiento = true;
@@ -267,7 +267,6 @@ function animate() {
           if (fase4){
             document.getElementById("title").innerHTML = "Precione la tecla M";
           }
-          console.log("Número de lanzamientos:", numerodelanzamientos);
         },2000*velocidad);
       }
     }
@@ -275,7 +274,7 @@ function animate() {
 
     if (keyListener.isPressed(keyCode.KEYI)){
       console.log("estado fase1",fase1)
-      if (fase1 == true && fase2 == false){
+      if (fase1 == true && fase2 == false && numerodelanzamientos2 < maximonumerodelanzamientos){
         //Repartir cartas
         let repartir = setInterval(() => {
           
@@ -319,7 +318,14 @@ function animate() {
           console.log("Grupo1",grupocard1)
           console.log("Grupo2",grupocard2)
           console.log("Grupo3",grupocard3)
-          console.log("Número de lanzamientos:", numerodelanzamientos);
+          // Incrementa numerodelanzamientos con retardo
+          setTimeout(() => {
+            if (numerodelanzamientos2 < maximonumerodelanzamientos && banderlanzamiento) {
+              numerodelanzamientos2 += 1;
+              console.log("Número de lanzamientos2:", numerodelanzamientos2);
+              banderlanzamiento= false; // Desactiva la bandera después del incremento
+            }
+          },100);
         },1000*velocidad);
       }
     }
@@ -327,7 +333,7 @@ function animate() {
 
     if (keyListener.isPressed(keyCode.ONE)){
       console.log("fase1",fase1,"fase2",fase2,"fase3",fase3, "fase 4", fase4)
-      if (fase1 == true && fase2 == true && fase3 == true && fase4 == false && fase5 == false && numerodelanzamientos2 < maximonumerodelanzamientos) {
+      if (fase1 == true && fase2 == true && fase3 == true && fase4 == false && fase5 == false ) {
         //Repartir cartas
         let agrupar = setInterval(() => {
           let contx = 0
@@ -410,14 +416,7 @@ function animate() {
           grupocard2 = []
           grupocard3 = []
 
-          // Incrementa numerodelanzamientos con retardo
-          setTimeout(() => {
-            if (numerodelanzamientos2 < maximonumerodelanzamientos && banderlanzamiento) {
-              numerodelanzamientos2 += 1;
-              console.log("Número de lanzamientos2:", numerodelanzamientos2);
-              banderlanzamiento= false; // Desactiva la bandera después del incremento
-            }
-          },100);
+          
 
         },2000);
 
@@ -427,7 +426,6 @@ function animate() {
     }
 
     if (keyListener.isPressed(keyCode.LETTERM)){
-      console.log("numerodelanzamientos",numerodelanzamientos2, "maximonumerodelanzamientos",maximonumerodelanzamientos)
       if (numerodelanzamientos = maximonumerodelanzamientos){
         //Ejecutar funcion Final
         final()
@@ -482,12 +480,13 @@ function animate() {
           fase5 = false
           // Incrementa numerodelanzamientos con retardo
           setTimeout(() => {
-            if (numerodelanzamientos2 < maximonumerodelanzamientos && banderlanzamiento) {
+            if (numerodelanzamientos2 < maximonumerodelanzamientos && !banderlanzamiento) {
               numerodelanzamientos2 += 1;
               console.log("Número de lanzamientos2:", numerodelanzamientos2);
-              banderlanzamiento= false; // Desactiva la bandera después del incremento
+              banderlanzamiento= true; // Desactiva la bandera después del incremento
             }
           },100);
+          
         },3000*velocidad);
 
       }
