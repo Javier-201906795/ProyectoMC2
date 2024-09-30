@@ -291,7 +291,7 @@ function animate() {
             cont += 1
             //Voltear cartas
             objects[i].rotation.y = 0 
-
+            console.log("carta", i,"cont", cont)
             if (cont == 1){
               objects[i].position.x = -3
               objects[i].position.y = conty
@@ -416,7 +416,7 @@ function animate() {
             ordenvaraja[cont] = grupocard3[i]
             cont +=1
           }
-          console.log("ordenvaraja",ordenvaraja)
+          console.log("Orden Varaja",ordenvaraja)
           //Limpiar grupos
           grupocard1 = []
           grupocard2 = []

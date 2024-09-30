@@ -18,7 +18,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Three of Hearts",
+			"name":"Six of Clubs",
 			"rotation":[
 				0.70710688829422,
 				0,
@@ -40,7 +40,7 @@
 					"specularFactor":0
 				}
 			},
-			"name":"01 - Default.006",
+			"name":"01 - Default.015",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":0
@@ -55,7 +55,7 @@
 					"specularFactor":0
 				}
 			},
-			"name":"3.001",
+			"name":"32",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":1
@@ -70,7 +70,7 @@
 					"specularFactor":0
 				}
 			},
-			"name":"07 - Default.006",
+			"name":"07 - Default.015",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":2
@@ -81,7 +81,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Malla.003",
+			"name":"Malla.048",
 			"primitives":[
 				{
 					"attributes":{
@@ -135,8 +135,8 @@
 		},
 		{
 			"mimeType":"image/jpeg",
-			"name":"Three of Hearts",
-			"uri":"Three%20of%20Hearts.jpg"
+			"name":"Six of Clubs",
+			"uri":"Six%20of%20Clubs.jpg"
 		},
 		{
 			"mimeType":"image/jpeg",
