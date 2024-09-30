@@ -46,19 +46,6 @@ for (let i = 0; i < cardnumber ; i++) {
 }
 
 
-//Bandera  iniciales
-let velocidad = 0.5
-let flagstart = true;
-let esperar = false;
-let fase1 = false;
-let fase2 = false;
-let fase3 = false;
-let fase4 = false;
-let fase5 = false, fase6 = false;
-let grupocard1 = []
-let grupocard2 = []
-let grupocard3 = []
-let ordenvaraja = []
 
 
 //##############################################################################
@@ -134,7 +121,40 @@ function addgrupocard3(objeto){
 }
 //##############################################################################
 
+function funcionnumerodelanzamientos(numero){
+  let funcion = Math.log(numero)/ Math.log(3);
+  return parseInt(funcion)
+}
 
+function cartaadivinar(){
+  return parseInt((cardnumber+1)/2)
+}
+
+function final(){
+  //obtener numero de carta
+  let cartaseleccionada = cartaadivinar()
+  console.log(cartaseleccionada)
+}
+
+//##############################################################################
+
+//Bandera  iniciales
+let velocidad = 0.5
+let flagstart = true;
+let esperar = false;
+let fase1 = false;
+let fase2 = false;
+let fase3 = false;
+let fase4 = false;
+let fase5 = false, fase6 = false;
+let grupocard1 = []
+let grupocard2 = []
+let grupocard3 = []
+let ordenvaraja = []
+let maximonumerodelanzamientos = funcionnumerodelanzamientos(cardnumber) + 1;
+let numerodelanzamientos = 0
+let numerodelanzamientos2 = 0
+let banderlanzamiento = true;
 
 
 // Función de animación se activa cada segundo
@@ -247,6 +267,7 @@ function animate() {
           if (fase4){
             document.getElementById("title").innerHTML = "Precione la tecla M";
           }
+          console.log("Número de lanzamientos:", numerodelanzamientos);
         },2000*velocidad);
       }
     }
@@ -298,6 +319,7 @@ function animate() {
           console.log("Grupo1",grupocard1)
           console.log("Grupo2",grupocard2)
           console.log("Grupo3",grupocard3)
+          console.log("Número de lanzamientos:", numerodelanzamientos);
         },1000*velocidad);
       }
     }
@@ -305,7 +327,7 @@ function animate() {
 
     if (keyListener.isPressed(keyCode.ONE)){
       console.log("fase1",fase1,"fase2",fase2,"fase3",fase3, "fase 4", fase4)
-      if (fase1 == true && fase2 == true && fase3 == true && fase4 == false && fase5 == false){
+      if (fase1 == true && fase2 == true && fase3 == true && fase4 == false && fase5 == false && numerodelanzamientos2 < maximonumerodelanzamientos) {
         //Repartir cartas
         let agrupar = setInterval(() => {
           let contx = 0
@@ -387,14 +409,31 @@ function animate() {
           grupocard1 = []
           grupocard2 = []
           grupocard3 = []
-           
-        },2000*velocidad);
+
+          // Incrementa numerodelanzamientos con retardo
+          setTimeout(() => {
+            if (numerodelanzamientos2 < maximonumerodelanzamientos && banderlanzamiento) {
+              numerodelanzamientos2 += 1;
+              console.log("Número de lanzamientos2:", numerodelanzamientos2);
+              banderlanzamiento= false; // Desactiva la bandera después del incremento
+            }
+          },100);
+
+        },2000);
+
+        
+        
       }
     }
 
     if (keyListener.isPressed(keyCode.LETTERM)){
+      console.log("numerodelanzamientos",numerodelanzamientos2, "maximonumerodelanzamientos",maximonumerodelanzamientos)
+      if (numerodelanzamientos = maximonumerodelanzamientos){
+        //Ejecutar funcion Final
+        final()
+      }
       console.log("fase1",fase1,"fase2",fase2,"fase3",fase3, "fase 4", fase4, "fase5",fase5)
-      if (fase1 == true && fase2 == true && fase3 == true && fase4 == true && fase5 == false){
+      if (fase1 == true && fase2 == true && fase3 == true && fase4 == true && fase5 == false && numerodelanzamientos2 < maximonumerodelanzamientos){
         //Repartir cartas
         let creargrupos = setInterval(() => {
           let cont = 0
@@ -435,13 +474,22 @@ function animate() {
           document.getElementById("title").innerHTML = "2| En que grupo esta? 1,2,3";
           fase6 = true
           console.log(grupocard1, grupocard2, grupocard3)
+          //Reiniciar banderas
           fase1 = true 
           fase2 = true 
           fase3 = true
           fase4 = false
           fase5 = false
-
+          // Incrementa numerodelanzamientos con retardo
+          setTimeout(() => {
+            if (numerodelanzamientos2 < maximonumerodelanzamientos && banderlanzamiento) {
+              numerodelanzamientos2 += 1;
+              console.log("Número de lanzamientos2:", numerodelanzamientos2);
+              banderlanzamiento= false; // Desactiva la bandera después del incremento
+            }
+          },100);
         },3000*velocidad);
+
       }
     }
 
