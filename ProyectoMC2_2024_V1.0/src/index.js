@@ -380,9 +380,10 @@ function animate() {
           console.log("Grupo3",grupocard3)
           // Incrementa numerodelanzamientos con retardo
           setTimeout(() => {
+            console.log("Anum L", numerodelanzamientos2, "max", maximonumerodelanzamientos, "flag L", banderlanzamiento)
             if (numerodelanzamientos2 < maximonumerodelanzamientos && banderlanzamiento) {
               numerodelanzamientos2 += 1;
-              console.log("BNúmero de lanzamientos2:", numerodelanzamientos2);
+              console.log("ANúmero de lanzamientos2:", numerodelanzamientos2);
               banderlanzamiento= false; // Desactiva la bandera después del incremento
             }
           },100);
@@ -711,9 +712,10 @@ function animate() {
             fase5 = false
             // Incrementa numerodelanzamientos con retardo
             setTimeout(() => {
+              console.log("Bnum L", numerodelanzamientos2, "max", maximonumerodelanzamientos, "flag L!", banderlanzamiento)
               if (numerodelanzamientos2 < maximonumerodelanzamientos && !banderlanzamiento) {
                 numerodelanzamientos2 += 1;
-                console.log("ANúmero de lanzamientos2:", numerodelanzamientos2);
+                console.log("BNúmero de lanzamientos2:", numerodelanzamientos2);
                 banderlanzamiento= true; // Desactiva la bandera después del incremento
               }
             },100);
