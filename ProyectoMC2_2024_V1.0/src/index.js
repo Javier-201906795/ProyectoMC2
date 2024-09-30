@@ -34,7 +34,10 @@ let object;
 let object2, object3, object4, object5, object6, object7, object8, object9, object10, object11, object12, object13, object14, object15;
 let objects = [object,object2,object3, object4,object5,object6,object7,object8,object9,object10,object11,object12,object13,object14,object15]
 //Numero de cartas
-let cardnumber = 9
+//obtener cartas a ingresar 
+let cardnumber = window.location.pathname.split('/').pop()
+
+
 
 //Ciclo para cargar Cartas
 for (let i = 0; i < cardnumber ; i++) {
@@ -145,7 +148,7 @@ function final(){
 //##############################################################################
 
 //Bandera  iniciales
-let velocidad = 0.5
+let velocidad = 1
 let flagstart = true;
 let esperar = false;
 let fase1 = false;
@@ -608,8 +611,8 @@ function animate() {
       }else{
         console.log("fase1",fase1,"fase2",fase2,"fase3",fase3, "fase 4", fase4, "fase5",fase5)
         if (fase1 == true && fase2 == true && fase3 == true && fase4 == true && fase5 == false && numerodelanzamientos2 < maximonumerodelanzamientos){
-          //Repartir cartas
-          let creargrupos = setInterval(() => {
+            //Repartir cartas
+            let creargrupos = setInterval(() => {
             let cont = 0
             let conty = -3
             let contz = 0
