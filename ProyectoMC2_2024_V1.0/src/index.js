@@ -126,7 +126,17 @@ function addgrupocard3(objeto){
 //##############################################################################
 
 function funcionnumerodelanzamientos(numero){
-  let funcion = Math.log(numero)/ Math.log(3);
+  let num = parseInt(numero)
+  let funcion = Math.log(num)/ Math.log(3);
+  //Funcion Tope
+  // Aplica redondeo personalizado
+  if (funcion >= 2.20) {
+    funcion = Math.ceil(funcion); // Redondea hacia arriba
+  } else if (funcion <= 2.15) {
+    funcion = Math.floor(funcion); // Redondea hacia abajo
+  } else {
+    funcion = Math.round(funcion); // Redondea según Math.round() para casos intermedios
+  }
   return parseInt(funcion)
 }
 
@@ -372,7 +382,7 @@ function animate() {
           setTimeout(() => {
             if (numerodelanzamientos2 < maximonumerodelanzamientos && banderlanzamiento) {
               numerodelanzamientos2 += 1;
-              console.log("Número de lanzamientos2:", numerodelanzamientos2);
+              console.log("BNúmero de lanzamientos2:", numerodelanzamientos2);
               banderlanzamiento= false; // Desactiva la bandera después del incremento
             }
           },100);
@@ -703,7 +713,7 @@ function animate() {
             setTimeout(() => {
               if (numerodelanzamientos2 < maximonumerodelanzamientos && !banderlanzamiento) {
                 numerodelanzamientos2 += 1;
-                console.log("Número de lanzamientos2:", numerodelanzamientos2);
+                console.log("ANúmero de lanzamientos2:", numerodelanzamientos2);
                 banderlanzamiento= true; // Desactiva la bandera después del incremento
               }
             },100);
