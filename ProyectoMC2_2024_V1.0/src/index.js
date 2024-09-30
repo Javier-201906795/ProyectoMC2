@@ -421,13 +421,95 @@ function animate() {
           grupocard1 = []
           grupocard2 = []
           grupocard3 = []
-
-          
-
         },2000);
+      }
+    }
 
-        
-        
+    if (keyListener.isPressed(keyCode.TWO)){
+      console.log("fase1",fase1,"fase2",fase2,"fase3",fase3, "fase 4", fase4)
+      if (fase1 == true && fase2 == true && fase3 == true && fase4 == false && fase5 == false ) {
+        //Repartir cartas
+        let agrupar = setInterval(() => {
+          let contx = 0
+          let conty = 0
+          let contz = 0
+          //[APILAR CARTAS GRUPO INFERIOR]
+          for (let i = 0; i < grupocard1.length ; i++) {
+            //mover hacie el centro
+            let carta = objects[grupocard1[i]]
+            carta.position.y = (conty-4) + i*0.25
+            carta.position.x = contx 
+            carta.position.z = contz + i*0.25
+            //contador
+            conty += 0.1
+            contx += 0.1
+            contz += 0.1
+          }
+          //[APILAR CARTAS GRUPO MEDIO]
+          //obteniendo ultima posicion para empezar
+          let ultimacarta = objects[grupocard1[grupocard1.length-1]]
+          contx = ultimacarta.position.x + 0.1
+          conty = ultimacarta.position.y + 1
+          contz = ultimacarta.position.z + 0.1
+          for (let i = 0; i < grupocard2.length ; i++) {
+            //mover hacie el centro
+            let carta = objects[grupocard2[i]]
+            carta.position.y = conty + i*0.25
+            carta.position.x = contx 
+            carta.position.z = contz + i*0.25
+            //contador
+            conty += 0.1
+            contx += 0.1
+            contz += 0.1
+          }
+          //[APILAR CARTAS GRUPO SUPERIOR]
+          //obteniendo ultima posicion para empezar
+          let ultimacarta2 = objects[grupocard2[grupocard2.length-1]]
+          contx = ultimacarta2.position.x + 0.1
+          conty = ultimacarta2.position.y + 1
+          contz = ultimacarta2.position.z + 0.1
+          for (let i = 0; i < grupocard3.length ; i++) {
+            //mover hacie el centro
+            let carta = objects[grupocard3[i]]
+            carta.position.y = conty + i*0.25
+            carta.position.x = contx 
+            carta.position.z = contz + i*0.25
+            //contador
+            conty += 0.1
+            contx += 0.1
+            contz += 0.1
+          }
+          renderer.render(scene, camera);
+        }, 1000/60)
+        //Detiene en tiempo determinado
+        setTimeout(() => {
+          clearInterval(agrupar);
+          document.getElementById("title").innerHTML = "..Presione Enter";
+          fase4 = true
+          fase1 = false
+          //Almacenar orden varaja
+          let cont = 0
+          //grupo inferior
+          for (let i = 0; i < grupocard1.length ; i++) {
+            ordenvaraja[cont] = grupocard1[i]
+            cont +=1
+          }
+          //grupo medio
+          for (let i = 0; i < grupocard2.length ; i++) {
+            ordenvaraja[cont] = grupocard2[i]
+            cont +=1
+          }
+          //grupo superior
+          for (let i = 0; i < grupocard3.length ; i++) {
+            ordenvaraja[cont] = grupocard3[i]
+            cont +=1
+          }
+          console.log("Orden Varaja",ordenvaraja)
+          //Limpiar grupos
+          grupocard1 = []
+          grupocard2 = []
+          grupocard3 = []
+        },2000);
       }
     }
 
