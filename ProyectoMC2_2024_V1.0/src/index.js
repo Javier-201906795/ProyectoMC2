@@ -211,7 +211,7 @@ function animate() {
 
       flagstart = false;
 
-      document.getElementById("title").innerHTML = "Escoge tu carta y memorice su carta.";
+      document.getElementById("title").innerHTML = "Presiona Enter.";
     }
   }
   
