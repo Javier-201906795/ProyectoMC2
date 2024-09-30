@@ -16,9 +16,6 @@ const scene = new THREE.Scene();
 
 // Crear la cámara
 const camera = createCamera();
-
-//Slecciona objeto 3D a importar 
-
 camera.position.z = 10;
 
 
@@ -34,8 +31,12 @@ let object;
 let object2, object3, object4, object5, object6, object7, object8, object9, object10, object11, object12, object13, object14, object15;
 let objects = [object,object2,object3, object4,object5,object6,object7,object8,object9,object10,object11,object12,object13,object14,object15]
 //Numero de cartas
-//obtener cartas a ingresar 
 let cardnumber = window.location.pathname.split('/').pop()
+//Camara posicion
+if (cardnumber == 15){
+  camera.position.z = 12;
+}
+
 
 
 
@@ -130,19 +131,27 @@ function funcionnumerodelanzamientos(numero){
 }
 
 function cartaadivinar(){
-  return parseInt((cardnumber+1)/2)
+  let cartastotal = parseInt(cardnumber)
+  let cartaadivinar = cartastotal+1
+  cartaadivinar = cartaadivinar/2
+  return parseInt(cartaadivinar)
 }
 
+let flagfinal = false
+
 function final(){
-  //obtener numero de carta
-  let cartaseleccionada = cartaadivinar()
-  console.log("Cartan seleccionanda:",cartaseleccionada)
-  console.log("orden varaja:",ordenvaraja)
-  let cartaG =  objects[ordenvaraja[cartaseleccionada-1]]
-  cartaG.position.x = 0
-  cartaG.position.y = 0
-  cartaG.rotation.y = 0
-  renderer.render(scene, camera);
+  if (!flagfinal){
+    //obtener numero de carta
+    let cartaseleccionada = cartaadivinar()
+    console.log("Cartan seleccionanda:",cartaseleccionada)
+    console.log("orden varaja:",ordenvaraja)
+    let cartaG =  objects[ordenvaraja[cartaseleccionada-1]]
+    cartaG.position.x = 0
+    cartaG.position.y = 0
+    cartaG.rotation.y = 0
+    renderer.render(scene, camera);
+    flagfinal = true
+  }
 }
 
 //##############################################################################
@@ -182,35 +191,67 @@ function animate() {
   //render inicial
   if(objetoscargados){
     if (flagstart){
-      //numero de cartas
-      if (cardnumber == 3){
-        objects[0].position.x = -3
-        objects[1].position.x = 0
-        objects[2].position.x = 3
-        renderer.render(scene, camera);
+      // Asignar posiciones en función del número de cartas
+      if (cardnumber == 9 || cardnumber == 3){
+        for (let i = 0; i < cardnumber; i++) {
+          // Ciclo de -3, 0, 3 para position.x
+          objects[i].position.x = (i % 3 === 0) ? -3 : (i % 3 === 1) ? 0 : 3;
+
+          // Calcular posicion Y 
+          let fila = Math.floor(i / 3); // Determina en qué fila estamos
+          objects[i].position.y = 4 - (fila * 4); // Cada fila se mueve 4 unidades hacia abajo
+
+          renderer.render(scene, camera);
+        }
       }
-      if (cardnumber == 9){
-        objects[0].position.x = -3
-        objects[1].position.x = 0
-        objects[2].position.x = 3
-        objects[3].position.x = -3
-        objects[4].position.x = 0
-        objects[5].position.x = 3
-        objects[6].position.x = -3
-        objects[7].position.x = 0
-        objects[8].position.x = 3
-        // //posicion y
-        objects[0].position.y = 4
-        objects[1].position.y = 4
-        objects[2].position.y = 4
-        objects[3].position.y = 0
-        objects[4].position.y = 0
-        objects[5].position.y = 0
-        objects[6].position.y = -4
-        objects[7].position.y = -4
-        objects[8].position.y = -4
-        renderer.render(scene, camera);
+      if (cardnumber == 15 || cardnumber == 21){
+        for (let i = 0; i < cardnumber; i++) {
+          
+          objects[i].position.x = (i % 5 === 0) ? -6 : 
+                                (i % 5 === 1) ? -3 : 
+                                (i % 5 === 2) ? 0 : 
+                                (i % 5 === 3) ? 3 : 6;
+
+          // Calcular posicion Y 
+          let fila = Math.floor(i / 5); // Determina en qué fila estamos
+          objects[i].position.y = 5 - (fila * 5); 
+
+          renderer.render(scene, camera);
+        }
       }
+
+
+
+
+      // //numero de cartas
+      // if (cardnumber == 3){
+      //   objects[0].position.x = -3
+      //   objects[1].position.x = 0
+      //   objects[2].position.x = 3
+      //   renderer.render(scene, camera);
+      // }
+      // if (cardnumber == 9){
+      //   objects[0].position.x = -3
+      //   objects[1].position.x = 0
+      //   objects[2].position.x = 3
+      //   objects[3].position.x = -3
+      //   objects[4].position.x = 0
+      //   objects[5].position.x = 3
+      //   objects[6].position.x = -3
+      //   objects[7].position.x = 0
+      //   objects[8].position.x = 3
+      //   // //posicion y
+      //   objects[0].position.y = 4
+      //   objects[1].position.y = 4
+      //   objects[2].position.y = 4
+      //   objects[3].position.y = 0
+      //   objects[4].position.y = 0
+      //   objects[5].position.y = 0
+      //   objects[6].position.y = -4
+      //   objects[7].position.y = -4
+      //   objects[8].position.y = -4
+      //   renderer.render(scene, camera);
+      // }
 
       flagstart = false;
 
@@ -605,6 +646,7 @@ function animate() {
     }
 
     if (keyListener.isPressed(keyCode.LETTERM)){
+      console.log("numerodelanzamientos2",numerodelanzamientos2, "maximo", maximonumerodelanzamientos)
       if (numerodelanzamientos2 >= maximonumerodelanzamientos){
         //Ejecutar funcion Final
         final()

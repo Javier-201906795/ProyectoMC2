@@ -18,12 +18,12 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Six of Hearts",
+			"name":"Seven of Hearts",
 			"rotation":[
-				0.7071068286895752,
+				0.70710688829422,
 				0,
 				0,
-				0.7071068286895752
+				0.7071066498756409
 			],
 			"scale":[
 				0.028504615649580956,
@@ -40,7 +40,7 @@
 					"specularFactor":0
 				}
 			},
-			"name":"01 - Default.014",
+			"name":"01 - Default.001",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":0
@@ -55,7 +55,7 @@
 					"specularFactor":0
 				}
 			},
-			"name":"6.001",
+			"name":"7",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":1
@@ -70,7 +70,7 @@
 					"specularFactor":0
 				}
 			},
-			"name":"07 - Default.014",
+			"name":"07 - Default.001",
 			"pbrMetallicRoughness":{
 				"baseColorTexture":{
 					"index":2
@@ -81,7 +81,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Malla.004",
+			"name":"Malla.021",
 			"primitives":[
 				{
 					"attributes":{
@@ -135,8 +135,8 @@
 		},
 		{
 			"mimeType":"image/jpeg",
-			"name":"Six of Hearts",
-			"uri":"Six%20of%20Hearts.jpg"
+			"name":"Seven of Hearts",
+			"uri":"Seven%20of%20Hearts.jpg"
 		},
 		{
 			"mimeType":"image/jpeg",
