@@ -133,7 +133,13 @@ function cartaadivinar(){
 function final(){
   //obtener numero de carta
   let cartaseleccionada = cartaadivinar()
-  console.log("final",cartaseleccionada)
+  console.log("Cartan seleccionanda:",cartaseleccionada)
+  console.log("orden varaja:",ordenvaraja)
+  let cartaG =  objects[ordenvaraja[cartaseleccionada-1]]
+  cartaG.position.x = 0
+  cartaG.position.y = 0
+  cartaG.rotation.y = 0
+  renderer.render(scene, camera);
 }
 
 //##############################################################################
