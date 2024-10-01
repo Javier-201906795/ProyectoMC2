@@ -296,9 +296,12 @@ function animate() {
           console.log("ENTER alternar",alternar,"fase1", fase1, "fase2", fase2 ,"fase3", fase3,"fase4", fase4,"fase5", fase5)
 
           if (alternar == false){
-            document.getElementById("title").innerHTML = "Precione la tecla I";
+            document.getElementById("title").innerHTML = "Precione la tecla i";
+            if (fase4){
+              document.getElementById("title").innerHTML = "Precione la tecla L";
+            }
             //banderas
-            fase2 = false
+            // fase2 = false
           }
           
           if (alternar == true && fase4 == true){
@@ -371,13 +374,15 @@ function animate() {
             console.log("Orden Varaja",ordenvaraja)
             // Incrementa numerodelanzamientos con retardo
             setTimeout(() => {
-              console.log("Anum L", numerodelanzamientos2, "max", maximonumerodelanzamientos, "flag L", banderlanzamiento)
+              console.log("Inumerodelanzamientos2", numerodelanzamientos2, "max", maximonumerodelanzamientos, "banderlanzamiento", banderlanzamiento)
               if (numerodelanzamientos2 < maximonumerodelanzamientos && banderlanzamiento) {
                 numerodelanzamientos2 += 1;
-                console.log("ANúmero de lanzamientos2:", numerodelanzamientos2);
+                console.log("INúmero de lanzamientos2:", numerodelanzamientos2);
                 banderlanzamiento= false; // Desactiva la bandera después del incremento
               }
             },100);
+            
+            console.log("I alternar",alternar,"fase1", fase1, "fase2", fase2 ,"fase3", fase3,"fase4", fase4,"fase5", fase5)
             //Banderas
             fase2 = true
             fase3 = true
@@ -714,14 +719,85 @@ function animate() {
             alternar = false
             // Incrementa numerodelanzamientos con retardo
             setTimeout(() => {
-              console.log("Bnum L", numerodelanzamientos2, "max", maximonumerodelanzamientos, "flag L!", banderlanzamiento)
+              console.log("Mnumerodelanzamientos2", numerodelanzamientos2, "max", maximonumerodelanzamientos, "banderlanzamiento", banderlanzamiento)
               if (numerodelanzamientos2 < maximonumerodelanzamientos && !banderlanzamiento) {
                 numerodelanzamientos2 += 1;
-                console.log("BNúmero de lanzamientos2:", numerodelanzamientos2);
+                console.log("MNúmero de lanzamientos2:", numerodelanzamientos2);
                 banderlanzamiento= true; // Desactiva la bandera después del incremento
               }
             },100);
             console.log("M alternar",alternar,"fase1", fase1, "fase2", fase2 ,"fase3", fase3,"fase4", fase4,"fase5", fase5)
+          },3000*velocidad);
+
+        }
+      }
+    }
+//##############################################################################
+    if (keyListener.isPressed(keyCode.LETTERL)){
+      console.log("numerodelanzamientos2",numerodelanzamientos2, "maximo", maximonumerodelanzamientos)
+      if (numerodelanzamientos2 >= maximonumerodelanzamientos){
+        //Ejecutar funcion Final
+        final()
+      }else{
+        console.log("fase1",fase1,"fase2",fase2,"fase3",fase3, "fase 4", fase4, "fase5",fase5)
+        if (fase1 == true && fase2 == true && fase3 == true && fase4 == true && fase5 == false && numerodelanzamientos2 < maximonumerodelanzamientos){
+            //Repartir cartas
+            let creargrupos = setInterval(() => {
+            let cont = 0
+            let conty = -3
+            let contz = 0
+            for (let i = 0; i < ordenvaraja.length ; i++) {
+              cont += 1
+              let carta = objects[ordenvaraja[i]]
+              //Voltear cartas
+              carta.rotation.y = 0 
+              if (cont == 1){
+                carta.position.x = -3
+                carta.position.y = conty
+                carta.position.z = contz
+                addgrupocard1(objects[ordenvaraja[i]])
+              }
+              if (cont == 2){
+                carta.position.x = 0
+                carta.position.y = conty
+                carta.position.z = contz
+                addgrupocard2(objects[ordenvaraja[i]])
+              }
+              if (cont == 3){
+                carta.position.x = 3
+                carta.position.y = conty
+                carta.position.z = contz
+                addgrupocard3(objects[ordenvaraja[i]])
+              }
+              //ciclos de 3
+              if (cont >= 3){ cont = 0; conty += 1 ; contz += 0.3}
+            }
+            
+            renderer.render(scene, camera);
+          }, 1000/60)
+          //Detiene en tiempo determinado
+          setTimeout(() => {
+            clearInterval(creargrupos);
+            document.getElementById("title").innerHTML = "2| En que grupo esta? 1,2,3";
+            fase6 = true
+            console.log(grupocard1, grupocard2, grupocard3)
+            //Reiniciar banderas
+            fase1 = true 
+            fase2 = true 
+            fase3 = true
+            fase4 = false
+            fase5 = false
+            alternar = true
+            // Incrementa numerodelanzamientos con retardo
+            setTimeout(() => {
+              console.log("L2numerodelanzamientos2", numerodelanzamientos2, "max", maximonumerodelanzamientos, "banderlanzamiento", banderlanzamiento)
+              if (numerodelanzamientos2 < maximonumerodelanzamientos && banderlanzamiento) {
+                numerodelanzamientos2 += 1;
+                console.log("L2.1Número de lanzamientos2:", numerodelanzamientos2);
+                banderlanzamiento= false; // Desactiva la bandera después del incremento
+              }
+            },100);
+            console.log("L alternar",alternar,"fase1", fase1, "fase2", fase2 ,"fase3", fase3,"fase4", fase4,"fase5", fase5)
           },3000*velocidad);
 
         }

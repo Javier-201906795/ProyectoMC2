@@ -9,6 +9,7 @@ let keyCode = {
     TWO: 50,
     THREE: 51,
     LETTERM: 77,
+    LETTERL: 76
 }
 
 
