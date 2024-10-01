@@ -336,8 +336,7 @@ function animate() {
         setTimeout(() => {
           clearInterval(repartir);
           document.getElementById("title").innerHTML = "En que grupo esta? 1, 2, 3";
-          fase2 = true
-          fase3 = true
+          
           console.log("Grupo1",grupocard1)
           console.log("Grupo2",grupocard2)
           console.log("Grupo3",grupocard3)
@@ -350,6 +349,9 @@ function animate() {
               banderlanzamiento= false; // Desactiva la bandera después del incremento
             }
           },100);
+          //Banderas
+          fase2 = true
+          fase3 = true
         },1000*velocidad);
       }
     }
