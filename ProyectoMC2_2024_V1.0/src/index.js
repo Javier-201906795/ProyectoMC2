@@ -169,6 +169,7 @@ function final(){
     cartaG.rotation.y = 0
     renderer.render(scene, camera);
     flagfinal = true
+    document.getElementById("title").innerHTML = "Esta es tu Carta.";
   }
 }
 
@@ -188,7 +189,6 @@ let grupocard2 = []
 let grupocard3 = []
 let ordenvaraja = []
 let maximonumerodelanzamientos = funcionnumerodelanzamientos(cardnumber);
-let numerodelanzamientos = 0
 let numerodelanzamientos2 = 0
 let banderlanzamiento = true;
 let alternar = false;
