@@ -183,7 +183,7 @@ let maximonumerodelanzamientos = funcionnumerodelanzamientos(cardnumber);
 let numerodelanzamientos = 0
 let numerodelanzamientos2 = 0
 let banderlanzamiento = true;
-
+let alternar = false;
 
 // Función de animación se activa cada segundo
 function animate() {
@@ -284,12 +284,25 @@ function animate() {
         //Detiene en tiempo determinado
         setTimeout(() => {
           clearInterval(juntar9);
-          fase1 = true;
+          
           console.log("fase1", fase1)
-          document.getElementById("title").innerHTML = "Precione la tecla I";
-          if (fase4){
+
+          if (alternar == false){
+            document.getElementById("title").innerHTML = "Precione la tecla I";
+          }
+          
+          if (alternar == true && fase4 == true){
             document.getElementById("title").innerHTML = "Precione la tecla M";
           }
+
+          //Banderas
+          fase1 = true;
+          alternar = true
+
+          // document.getElementById("title").innerHTML = "Precione la tecla I";
+          // if (fase4){
+          //   document.getElementById("title").innerHTML = "Precione la tecla M";
+          // }
         },2000*velocidad);
       }
     }
