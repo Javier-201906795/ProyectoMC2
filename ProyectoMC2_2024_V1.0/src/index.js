@@ -285,10 +285,12 @@ function animate() {
         setTimeout(() => {
           clearInterval(juntar9);
           
-          console.log("fase1", fase1)
+          console.log("ENTER alternar",alternar,"fase1", fase1, "fase2", fase2 ,"fase3", fase3,"fase4", fase4,"fase5", fase5)
 
           if (alternar == false){
             document.getElementById("title").innerHTML = "Precione la tecla I";
+            //banderas
+            fase2 = false
           }
           
           if (alternar == true && fase4 == true){
@@ -297,7 +299,7 @@ function animate() {
 
           //Banderas
           fase1 = true;
-          alternar = true
+          
 
           // document.getElementById("title").innerHTML = "Precione la tecla I";
           // if (fase4){
@@ -310,62 +312,70 @@ function animate() {
 //##############################################################################
     if (keyListener.isPressed(keyCode.KEYI)){
       console.log("estado fase1",fase1)
-      if (fase1 == true && fase2 == false && numerodelanzamientos2 < maximonumerodelanzamientos){
-        //Repartir cartas
-        let repartir = setInterval(() => {
-          
-          let cont = 0
-          let conty = -3
-          let contz = 0
-          for (let i = 0; i < cardnumber ; i++) {
-            cont += 1
-            //Voltear cartas
-            objects[i].rotation.y = 0 
-            console.log("carta", i,"cont", cont)
-            if (cont == 1){
-              objects[i].position.x = -3
-              objects[i].position.y = conty
-              objects[i].position.z = contz
-              addgrupocard1(objects[i])
+      console.log("numerodelanzamientos2",numerodelanzamientos2, "maximo", maximonumerodelanzamientos)
+      if (numerodelanzamientos2 >= maximonumerodelanzamientos){
+        //Ejecutar funcion Final
+        final()
+      }else{
+      
+        if (fase1 == true && fase2 == false && numerodelanzamientos2 < maximonumerodelanzamientos){
+          //Repartir cartas
+          let repartir = setInterval(() => {
+            
+            let cont = 0
+            let conty = -3
+            let contz = 0
+            for (let i = 0; i < cardnumber ; i++) {
+              cont += 1
+              //Voltear cartas
+              objects[i].rotation.y = 0 
+              if (cont == 1){
+                objects[i].position.x = -3
+                objects[i].position.y = conty
+                objects[i].position.z = contz
+                addgrupocard1(objects[i])
+              }
+              if (cont == 2){
+                objects[i].position.x = 0
+                objects[i].position.y = conty
+                objects[i].position.z = contz
+                addgrupocard2(objects[i])
+              }
+              if (cont == 3){
+                objects[i].position.x = 3
+                objects[i].position.y = conty
+                objects[i].position.z = contz
+                addgrupocard3(objects[i])
+              }
+              //ciclos de 3
+              if (cont >= 3){ cont = 0; conty += 1 ; contz += 0.3}
             }
-            if (cont == 2){
-              objects[i].position.x = 0
-              objects[i].position.y = conty
-              objects[i].position.z = contz
-              addgrupocard2(objects[i])
-            }
-            if (cont == 3){
-              objects[i].position.x = 3
-              objects[i].position.y = conty
-              objects[i].position.z = contz
-              addgrupocard3(objects[i])
-            }
-            //ciclos de 3
-            if (cont >= 3){ cont = 0; conty += 1 ; contz += 0.3}
-          }
-          renderer.render(scene, camera);
-        }, 1000/60)
-        //Detiene en tiempo determinado
-        setTimeout(() => {
-          clearInterval(repartir);
-          document.getElementById("title").innerHTML = "En que grupo esta? 1, 2, 3";
-          
-          console.log("Grupo1",grupocard1)
-          console.log("Grupo2",grupocard2)
-          console.log("Grupo3",grupocard3)
-          // Incrementa numerodelanzamientos con retardo
+            renderer.render(scene, camera);
+          }, 1000/60)
+          //Detiene en tiempo determinado
           setTimeout(() => {
-            console.log("Anum L", numerodelanzamientos2, "max", maximonumerodelanzamientos, "flag L", banderlanzamiento)
-            if (numerodelanzamientos2 < maximonumerodelanzamientos && banderlanzamiento) {
-              numerodelanzamientos2 += 1;
-              console.log("ANúmero de lanzamientos2:", numerodelanzamientos2);
-              banderlanzamiento= false; // Desactiva la bandera después del incremento
-            }
-          },100);
-          //Banderas
-          fase2 = true
-          fase3 = true
-        },1000*velocidad);
+            clearInterval(repartir);
+            document.getElementById("title").innerHTML = "En que grupo esta? 1, 2, 3";
+            
+            console.log("Grupo1",grupocard1)
+            console.log("Grupo2",grupocard2)
+            console.log("Grupo3",grupocard3)
+            // Incrementa numerodelanzamientos con retardo
+            setTimeout(() => {
+              console.log("Anum L", numerodelanzamientos2, "max", maximonumerodelanzamientos, "flag L", banderlanzamiento)
+              if (numerodelanzamientos2 < maximonumerodelanzamientos && banderlanzamiento) {
+                numerodelanzamientos2 += 1;
+                console.log("ANúmero de lanzamientos2:", numerodelanzamientos2);
+                banderlanzamiento= false; // Desactiva la bandera después del incremento
+              }
+            },100);
+            //Banderas
+            fase2 = true
+            fase3 = true
+            fase4 = false
+            alternar = true
+          },1000*velocidad);
+        }
       }
     }
 //##############################################################################
@@ -692,6 +702,7 @@ function animate() {
             fase3 = true
             fase4 = false
             fase5 = false
+            alternar = false
             // Incrementa numerodelanzamientos con retardo
             setTimeout(() => {
               console.log("Bnum L", numerodelanzamientos2, "max", maximonumerodelanzamientos, "flag L!", banderlanzamiento)
@@ -701,7 +712,7 @@ function animate() {
                 banderlanzamiento= true; // Desactiva la bandera después del incremento
               }
             },100);
-            
+            console.log("M alternar",alternar,"fase1", fase1, "fase2", fase2 ,"fase3", fase3,"fase4", fase4,"fase5", fase5)
           },3000*velocidad);
 
         }
