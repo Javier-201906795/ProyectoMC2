@@ -197,7 +197,7 @@ let alternar = false;
 function animate() {
 
   //Esperar a que cargen todos las cartas 3D
-  let objetoscargados = false;
+  let objetoscargados = true;
   for (let i = 0; i < cardnumber ; i++) {
     if (objects[i]){
       objetoscargados = true;
@@ -338,25 +338,27 @@ function animate() {
             let contz = 0
             for (let i = 0; i < cardnumber ; i++) {
               cont += 1
+              //obtener carta
+              let carta = objects[i]
               //Voltear cartas
-              objects[i].rotation.y = 0 
+              carta.rotation.y = 0 
               if (cont == 1){
-                objects[i].position.x = -3
-                objects[i].position.y = conty
-                objects[i].position.z = contz
-                addgrupocard1(objects[i])
+                carta.position.x = -3
+                carta.position.y = conty
+                carta.position.z = contz
+                addgrupocard1(carta)
               }
               if (cont == 2){
-                objects[i].position.x = 0
-                objects[i].position.y = conty
-                objects[i].position.z = contz
-                addgrupocard2(objects[i])
+                carta.position.x = 0
+                carta.position.y = conty
+                carta.position.z = contz
+                addgrupocard2(carta)
               }
               if (cont == 3){
-                objects[i].position.x = 3
-                objects[i].position.y = conty
-                objects[i].position.z = contz
-                addgrupocard3(objects[i])
+                carta.position.x = 3
+                carta.position.y = conty
+                carta.position.z = contz
+                addgrupocard3(carta)
               }
               //ciclos de 3
               if (cont >= 3){ cont = 0; conty += 1 ; contz += 0.3}
