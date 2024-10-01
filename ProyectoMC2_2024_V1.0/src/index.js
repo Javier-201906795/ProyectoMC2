@@ -341,7 +341,10 @@ function animate() {
               //obtener carta
               let carta = objects[i]
               //Voltear cartas
-              carta.rotation.y = 0 
+              if(parseFloat(carta.rotation.y) >= 0){
+                carta.rotation.y -= 0.1 
+              }
+              
               if (cont == 1){
                 carta.position.x = -3
                 carta.position.y = conty
