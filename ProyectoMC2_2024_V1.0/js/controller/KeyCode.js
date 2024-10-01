@@ -5,9 +5,9 @@ let keyCode = {
     ARROWDOWN: 40,
     ARROWUP: 38,
     KEYI: 73,
-    ONE: 97,
-    TWO: 98,
-    THREE: 99,
+    ONE: 49,
+    TWO: 50,
+    THREE: 51,
     LETTERM: 77,
 }
 
