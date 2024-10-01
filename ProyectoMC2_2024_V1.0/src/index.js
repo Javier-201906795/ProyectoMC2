@@ -229,58 +229,21 @@ function animate() {
           renderer.render(scene, camera);
         }
       }
-
-
-
-
-      // //numero de cartas
-      // if (cardnumber == 3){
-      //   objects[0].position.x = -3
-      //   objects[1].position.x = 0
-      //   objects[2].position.x = 3
-      //   renderer.render(scene, camera);
-      // }
-      // if (cardnumber == 9){
-      //   objects[0].position.x = -3
-      //   objects[1].position.x = 0
-      //   objects[2].position.x = 3
-      //   objects[3].position.x = -3
-      //   objects[4].position.x = 0
-      //   objects[5].position.x = 3
-      //   objects[6].position.x = -3
-      //   objects[7].position.x = 0
-      //   objects[8].position.x = 3
-      //   // //posicion y
-      //   objects[0].position.y = 4
-      //   objects[1].position.y = 4
-      //   objects[2].position.y = 4
-      //   objects[3].position.y = 0
-      //   objects[4].position.y = 0
-      //   objects[5].position.y = 0
-      //   objects[6].position.y = -4
-      //   objects[7].position.y = -4
-      //   objects[8].position.y = -4
-      //   renderer.render(scene, camera);
-      // }
-
+      //Bandera inicio programa
       flagstart = false;
-
       document.getElementById("title").innerHTML = "Presiona Enter.";
     }
   }
   
 
-
+//Three js
   requestAnimationFrame(animate);
 
  
   
-
-
+//##############################################################################
+//[EMPEZAR]
   if(objetoscargados){
-    
-    //[EMPEZAR]
-    
     //Escucha la tecla ENTER
     if (keyListener.isPressed(keyCode.ENTER)) {
       if (!fase1){
@@ -297,9 +260,9 @@ function animate() {
           }
           renderer.render(scene, camera);
         }, 1000/60);
+
         //Detiene en tiempo determinado
         setTimeout(() => {clearInterval(voltear9);},3000);
-        
         //Juntarlas
         let juntar9 = setInterval(() => {
           if (!esperar){
@@ -331,7 +294,7 @@ function animate() {
       }
     }
     
-
+//##############################################################################
     if (keyListener.isPressed(keyCode.KEYI)){
       console.log("estado fase1",fase1)
       if (fase1 == true && fase2 == false && numerodelanzamientos2 < maximonumerodelanzamientos){
@@ -390,7 +353,7 @@ function animate() {
         },1000*velocidad);
       }
     }
-
+//##############################################################################
 
     if (keyListener.isPressed(keyCode.ONE)){
       console.log("fase1",fase1,"fase2",fase2,"fase3",fase3, "fase 4", fase4)
@@ -480,6 +443,7 @@ function animate() {
       }
     }
 
+//##############################################################################
     if (keyListener.isPressed(keyCode.TWO)){
       console.log("fase1",fase1,"fase2",fase2,"fase3",fase3, "fase 4", fase4)
       if (fase1 == true && fase2 == true && fase3 == true && fase4 == false && fase5 == false ) {
@@ -568,6 +532,8 @@ function animate() {
       }
     }
 
+
+//##############################################################################
     if (keyListener.isPressed(keyCode.THREE)) {
       console.log("fase1",fase1,"fase2",fase2,"fase3",fase3, "fase 4", fase4)
       if (fase1 == true && fase2 == true && fase3 == true && fase4 == false && fase5 == false ) {
@@ -656,6 +622,7 @@ function animate() {
       }
     }
 
+//##############################################################################
     if (keyListener.isPressed(keyCode.LETTERM)){
       console.log("numerodelanzamientos2",numerodelanzamientos2, "maximo", maximonumerodelanzamientos)
       if (numerodelanzamientos2 >= maximonumerodelanzamientos){
@@ -726,34 +693,6 @@ function animate() {
       }
     }
 
-    //SI preciona tecla arriva
-    if (keyListener.isPressed(keyCode.ARROWUP)){
-      //rotar a 60 fps
-      let rotarcarta1 = setInterval(() => {
-        objects[0].rotation.y += 0.01  
-        objects[0].position.y += 0.01  
-        objects[1].rotation.y -= 0.01  
-        objects[1].position.y -= 0.01  
-        renderer.render(scene, camera);
-      }, 1000/60);
-      //Detiene en tiempo determinado
-      setTimeout(() => {clearInterval(rotarcarta1);},1000);
-    }
-
-
-    //SI preciona tecla arriva
-    if (keyListener.isPressed(keyCode.ARROWDOWN)){
-      //rotar a 60 fps
-      let rotarcarta2 = setInterval(() => {
-        objects[0].rotation.y -= 0.01  
-        objects[0].position.y -= 0.01  
-        objects[1].rotation.y += 0.01  
-        objects[1].position.y += 0.01  
-        renderer.render(scene, camera);
-      }, 1000/60);
-      //Detiene en tiempo determinado
-      setTimeout(() => {clearInterval(rotarcarta2);},1000);
-    }
   }
 }
 
@@ -763,7 +702,6 @@ addResizeListener(camera, renderer);
 
 // Iniciar la animación
 animate();
-
 
 //iniciar
 loopMachine.start()
