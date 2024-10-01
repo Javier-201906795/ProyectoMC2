@@ -11,6 +11,14 @@ import loopMachine from "../js/controller/Loopmachine.js";
 import keyListener from "../js/controller/KeyListener.js";
 import keyCode from "../js/controller/KeyCode.js";
 
+//PROYECTO MC2 2024
+//ALUMNO: Javier Ricardo Yllescas Barrios
+//CARNE: 201906795
+//Version Programa: V2.0.0
+//{ Funciona con 3 y 9 cartas }
+
+
+
 // Crear la escena
 const scene = new THREE.Scene();
 
