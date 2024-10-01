@@ -360,6 +360,7 @@ function animate() {
             console.log("Grupo1",grupocard1)
             console.log("Grupo2",grupocard2)
             console.log("Grupo3",grupocard3)
+            console.log("Orden Varaja",ordenvaraja)
             // Incrementa numerodelanzamientos con retardo
             setTimeout(() => {
               console.log("Anum L", numerodelanzamientos2, "max", maximonumerodelanzamientos, "flag L", banderlanzamiento)
