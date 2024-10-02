@@ -7,7 +7,6 @@ import { addControls } from "./scene/controls.js";
 import { loadModel } from "./loaders/gltfLoader.js";
 import { addResizeListener } from "./scene/resizeListener.js";
 
-import loopMachine from "./js/controller/Loopmachine.js";
 import keyListener from "./js/controller/KeyListener.js";
 import keyCode from "./js/controller/KeyCode.js";
 
@@ -861,5 +860,4 @@ addResizeListener(camera, renderer);
 animate();
 
 //iniciar
-loopMachine.start()
 keyListener.start()
