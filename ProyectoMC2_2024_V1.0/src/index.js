@@ -16,7 +16,7 @@ import keyCode from "../js/controller/KeyCode.js";
 //PROYECTO MC2 2024
 //ALUMNO: Javier Ricardo Yllescas Barrios
 //CARNE: 201906795
-//Version Programa: V2.1.1
+//Version Programa: V2.1.2
 //{ Funciona con 3, 9, 15 cartas }
 
 
@@ -180,23 +180,28 @@ function final(){
 }
 
 //##############################################################################
+let esperaranimacion = false
 //Animation
-function limitesup(ubicacion, paso, limite){
+function limitesup(ubicacion, paso, limite, esperaranim){
   let data = 0
-  if (parseFloat(ubicacion) <= limite){
-    data = parseFloat(paso)
-  }else{
-    data = 0
+  if(!esperaranim){
+    if (parseFloat(ubicacion) <= limite){
+      data = parseFloat(paso)
+    }else{
+      data = 0
+    }
   }
   return data
 }
 
-function limiteinf(ubicacion, paso, limite){
+function limiteinf(ubicacion, paso, limite, esperaranim){
   let data = 0
-  if (parseFloat(ubicacion) >= limite){
-    data = parseFloat(paso)
-  }else{
-    data = 0
+  if(!esperaranim){
+    if (parseFloat(ubicacion) >= limite){
+      data = parseFloat(paso)
+    }else{
+      data = 0
+    }
   }
   return data
 }
@@ -375,26 +380,38 @@ function animate() {
               //Crear Grupos de Cartas
               if (cont == 1){
                 // carta.position.x = -3
-                carta.position.x += limitesup(carta.position.x,0.04,-3)
+                carta.position.x += limitesup(carta.position.x,0.04,-3,esperaranimacion)
                 addgrupocard1(carta)
               }
               if (cont == 2){
                 // carta.position.x = 0
-                carta.position.x += limitesup(carta.position.x,0.08,0)
+                carta.position.x += limitesup(carta.position.x,0.08,0,esperaranimacion)
                 addgrupocard2(carta)
               }
               if (cont == 3){
                 // carta.position.x = 3
-                carta.position.x += limitesup(carta.position.x,0.12,3)
+                carta.position.x += limitesup(carta.position.x,0.12,3,esperaranimacion)
                 addgrupocard3(carta)
               }
               //Posicion Y y Z
-              carta.position.y -= limiteinf(carta.position.y,0.05,conty)
+              carta.position.y -= limiteinf(carta.position.y,0.05,conty,esperaranimacion)
               carta.position.z = contz
               //ciclos de 3
               if (cont >= 3){ cont = 0; conty += 1 ; contz -= 0.3}
+              //bandera
+              // if(carta.position.x >= -3){
+              //   // esperaranimacion = true
+              //   console.log("ALERT",carta.position.x, -3)
+              // }
+              // if (esperaranimacion == true){
+              //   setTimeout(() => {
+              //     esperaranimacion = false
+              //   },10)
+              // }
             }
             
+
+            //Render
             renderer.render(scene, camera);
           }, 1000/60)
           //Detiene en tiempo determinado
