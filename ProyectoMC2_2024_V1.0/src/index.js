@@ -750,7 +750,7 @@ function animate() {
                 addgrupocard3(objects[ordenvaraja[i]])
               }
               //ciclos de 3
-              if (cont >= 3){ cont = 0; conty += 1 ; contz += 0.3}
+              if (cont >= 3){ cont = 0; conty += 1 ; contz -= 0.3}
             }
             
             renderer.render(scene, camera);
@@ -821,7 +821,7 @@ function animate() {
                 addgrupocard3(objects[ordenvaraja[i]])
               }
               //ciclos de 3
-              if (cont >= 3){ cont = 0; conty += 1 ; contz += 0.3}
+              if (cont >= 3){ cont = 0; conty += 1 ; contz -= 0.3}
             }
             
             renderer.render(scene, camera);
