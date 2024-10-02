@@ -174,8 +174,8 @@ function final(){
     cartaG.position.y = 0
     cartaG.rotation.y = 0
     renderer.render(scene, camera);
-    flagfinal = true
-    document.getElementById("title").innerHTML = "Esta es tu Carta.";
+    // flagfinal = true
+    document.getElementById("title").innerHTML = "Esta es tu Carta. Presiona (M)";
   }
 }
 
@@ -272,6 +272,7 @@ function animate() {
       }
       //Bandera inicio programa
       flagstart = false;
+
       document.getElementById("title").innerHTML = "Presiona Enter.";
     }
   }
@@ -328,27 +329,21 @@ function animate() {
           
           console.log("ENTER alternar",alternar,"fase1", fase1, "fase2", fase2 ,"fase3", fase3,"fase4", fase4,"fase5", fase5)
 
-          if (alternar == false){
-            document.getElementById("title").innerHTML = "Precione la tecla i";
-            if (fase4){
-              document.getElementById("title").innerHTML = "Precione la tecla L";
+          setTimeout(() => {
+            if (alternar == false){
+              document.getElementById("title").innerHTML = "Precione la tecla i";
+              if (fase4){
+                document.getElementById("title").innerHTML = "Precione la tecla L";
+              }
             }
-            //banderas
-            // fase2 = false
-          }
-          
-          if (alternar == true && fase4 == true){
-            document.getElementById("title").innerHTML = "Precione la tecla M";
-          }
+            if (alternar == true && fase4 == true){
+              document.getElementById("title").innerHTML = "Precione la tecla M";
+            }
+          },200)
 
           //Banderas
           fase1 = true;
           
-
-          // document.getElementById("title").innerHTML = "Precione la tecla I";
-          // if (fase4){
-          //   document.getElementById("title").innerHTML = "Precione la tecla M";
-          // }
         },2000*velocidad);
       }
     }
@@ -398,16 +393,6 @@ function animate() {
               carta.position.z = contz
               //ciclos de 3
               if (cont >= 3){ cont = 0; conty += 1 ; contz -= 0.3}
-              //bandera
-              // if(carta.position.x >= -3){
-              //   // esperaranimacion = true
-              //   console.log("ALERT",carta.position.x, -3)
-              // }
-              // if (esperaranimacion == true){
-              //   setTimeout(() => {
-              //     esperaranimacion = false
-              //   },10)
-              // }
             }
             
 
@@ -417,7 +402,10 @@ function animate() {
           //Detiene en tiempo determinado
           setTimeout(() => {
             clearInterval(repartir);
-            document.getElementById("title").innerHTML = "En que grupo esta? 1, 2, 3";
+            
+            setTimeout(() => {
+              document.getElementById("title").innerHTML = "En que grupo esta? 1, 2, 3";
+            },100)
             
             console.log("Grupo1",grupocard1)
             console.log("Grupo2",grupocard2)
@@ -439,7 +427,7 @@ function animate() {
             fase3 = true
             fase4 = false
             alternar = true
-          },3000*velocidad);
+          },2000*velocidad);
         }
       }
     }
@@ -504,7 +492,9 @@ function animate() {
         //Detiene en tiempo determinado
         setTimeout(() => {
           clearInterval(agrupar);
-          document.getElementById("title").innerHTML = "..Presione Enter";
+          setTimeout(() => {
+            document.getElementById("title").innerHTML = "..Presione Enter";
+          },100)
           fase4 = true
           fase1 = false
           //Almacenar orden varaja
@@ -529,7 +519,7 @@ function animate() {
           grupocard1 = []
           grupocard2 = []
           grupocard3 = []
-        },2000);
+        },1000);
       }
     }
 
@@ -593,7 +583,9 @@ function animate() {
         //Detiene en tiempo determinado
         setTimeout(() => {
           clearInterval(agrupar);
-          document.getElementById("title").innerHTML = "..Presione Enter";
+          setTimeout(() => {
+            document.getElementById("title").innerHTML = "..Presione Enter";
+          },100)
           fase4 = true
           fase1 = false
           //Almacenar orden varaja
@@ -618,7 +610,7 @@ function animate() {
           grupocard1 = []
           grupocard2 = []
           grupocard3 = []
-        },2000);
+        },1000);
       }
     }
 
@@ -683,7 +675,9 @@ function animate() {
         //Detiene en tiempo determinado
         setTimeout(() => {
           clearInterval(agrupar);
-          document.getElementById("title").innerHTML = "..Presione Enter";
+          setTimeout(() => {
+            document.getElementById("title").innerHTML = "..Presione Enter";
+          },100)
           fase4 = true
           fase1 = false
           //Almacenar orden varaja
@@ -708,7 +702,7 @@ function animate() {
           grupocard1 = []
           grupocard2 = []
           grupocard3 = []
-        },2000);
+        },1000);
       }
     }
 
@@ -758,7 +752,9 @@ function animate() {
           //Detiene en tiempo determinado
           setTimeout(() => {
             clearInterval(creargrupos);
-            document.getElementById("title").innerHTML = "2| En que grupo esta? 1,2,3";
+            setTimeout(() => {
+              document.getElementById("title").innerHTML = "2| En que grupo esta? 1,2,3";
+            },100)
             fase6 = true
             console.log(grupocard1, grupocard2, grupocard3)
             //Reiniciar banderas
@@ -778,7 +774,7 @@ function animate() {
               }
             },100);
             console.log("M alternar",alternar,"fase1", fase1, "fase2", fase2 ,"fase3", fase3,"fase4", fase4,"fase5", fase5)
-          },3000*velocidad);
+          },2000*velocidad);
 
         }
       }
@@ -829,7 +825,9 @@ function animate() {
           //Detiene en tiempo determinado
           setTimeout(() => {
             clearInterval(creargrupos);
-            document.getElementById("title").innerHTML = "2| En que grupo esta? 1,2,3";
+            setTimeout(() => {
+              document.getElementById("title").innerHTML = "2| En que grupo esta? 1,2,3";
+            },100)
             fase6 = true
             console.log(grupocard1, grupocard2, grupocard3)
             //Reiniciar banderas
@@ -849,7 +847,7 @@ function animate() {
               }
             },100);
             console.log("L alternar",alternar,"fase1", fase1, "fase2", fase2 ,"fase3", fase3,"fase4", fase4,"fase5", fase5)
-          },3000*velocidad);
+          },2000*velocidad);
 
         }
       }
