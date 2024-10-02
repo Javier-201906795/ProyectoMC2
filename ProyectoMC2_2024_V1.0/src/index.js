@@ -16,7 +16,7 @@ import keyCode from "../js/controller/KeyCode.js";
 //PROYECTO MC2 2024
 //ALUMNO: Javier Ricardo Yllescas Barrios
 //CARNE: 201906795
-//Version Programa: V2.1.2
+//Version Programa: V2.2.0
 //{ Funciona con 3, 9, 15 cartas }
 
 
