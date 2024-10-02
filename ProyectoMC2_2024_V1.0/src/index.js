@@ -11,11 +11,14 @@ import loopMachine from "../js/controller/Loopmachine.js";
 import keyListener from "../js/controller/KeyListener.js";
 import keyCode from "../js/controller/KeyCode.js";
 
+
+
 //PROYECTO MC2 2024
 //ALUMNO: Javier Ricardo Yllescas Barrios
 //CARNE: 201906795
-//Version Programa: V2.1.0
+//Version Programa: V2.1.1
 //{ Funciona con 3, 9, 15 cartas }
+
 
 
 
@@ -131,6 +134,9 @@ function addgrupocard3(objeto){
     grupocard3.push(index);
   }
 }
+
+
+
 //##############################################################################
 
 function funcionnumerodelanzamientos(numero){
@@ -171,6 +177,28 @@ function final(){
     flagfinal = true
     document.getElementById("title").innerHTML = "Esta es tu Carta.";
   }
+}
+
+//##############################################################################
+//Animation
+function limitesup(ubicacion, paso, limite){
+  let data = 0
+  if (parseFloat(ubicacion) <= limite){
+    data = parseFloat(paso)
+  }else{
+    data = 0
+  }
+  return data
+}
+
+function limiteinf(ubicacion, paso, limite){
+  let data = 0
+  if (parseFloat(ubicacion) >= limite){
+    data = parseFloat(paso)
+  }else{
+    data = 0
+  }
+  return data
 }
 
 //##############################################################################
@@ -344,28 +372,29 @@ function animate() {
               if(parseFloat(carta.rotation.y) >= 0){
                 carta.rotation.y -= 0.1 
               }
-              
+              //Crear Grupos de Cartas
               if (cont == 1){
-                carta.position.x = -3
-                carta.position.y = conty
-                carta.position.z = contz
+                // carta.position.x = -3
+                carta.position.x += limitesup(carta.position.x,0.04,-3)
                 addgrupocard1(carta)
               }
               if (cont == 2){
-                carta.position.x = 0
-                carta.position.y = conty
-                carta.position.z = contz
+                // carta.position.x = 0
+                carta.position.x += limitesup(carta.position.x,0.08,0)
                 addgrupocard2(carta)
               }
               if (cont == 3){
-                carta.position.x = 3
-                carta.position.y = conty
-                carta.position.z = contz
+                // carta.position.x = 3
+                carta.position.x += limitesup(carta.position.x,0.12,3)
                 addgrupocard3(carta)
               }
+              //Posicion Y y Z
+              carta.position.y -= limiteinf(carta.position.y,0.05,conty)
+              carta.position.z = contz
               //ciclos de 3
-              if (cont >= 3){ cont = 0; conty += 1 ; contz += 0.3}
+              if (cont >= 3){ cont = 0; conty += 1 ; contz -= 0.3}
             }
+            
             renderer.render(scene, camera);
           }, 1000/60)
           //Detiene en tiempo determinado
@@ -393,7 +422,7 @@ function animate() {
             fase3 = true
             fase4 = false
             alternar = true
-          },1000*velocidad);
+          },3000*velocidad);
         }
       }
     }
