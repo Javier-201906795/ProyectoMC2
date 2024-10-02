@@ -374,17 +374,14 @@ function animate() {
               }
               //Crear Grupos de Cartas
               if (cont == 1){
-                // carta.position.x = -3
                 carta.position.x += limitesup(carta.position.x,0.04,-3,esperaranimacion)
                 addgrupocard1(carta)
               }
               if (cont == 2){
-                // carta.position.x = 0
                 carta.position.x += limitesup(carta.position.x,0.08,0,esperaranimacion)
                 addgrupocard2(carta)
               }
               if (cont == 3){
-                // carta.position.x = 3
                 carta.position.x += limitesup(carta.position.x,0.12,3,esperaranimacion)
                 addgrupocard3(carta)
               }
