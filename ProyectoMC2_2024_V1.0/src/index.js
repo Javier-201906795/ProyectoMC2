@@ -15,8 +15,11 @@ import keyCode from "./js/controller/KeyCode.js";
 //PROYECTO MC2 2024
 //ALUMNO: Javier Ricardo Yllescas Barrios
 //CARNE: 201906795
-//Version Programa: V2.2.0
+//Version Programa: V3.0.0
 //{ Funciona con 3, 9, 15 cartas }
+//Correcciones pendientes: 
+//-Mostrar solo 3 filas
+//-Funcinoe con mas cartas
 
 
 
@@ -148,7 +151,7 @@ function funcionnumerodelanzamientos(numero){
   } else if (funcion <= 2.15) {
     funcion = Math.floor(funcion); // Redondea hacia abajo
   } else {
-    funcion = Math.round(funcion); // Redondea según Math.round() para casos intermedios
+    funcion = Math.round(funcion); 
   }
   return parseInt(funcion)
 }
