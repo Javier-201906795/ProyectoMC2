@@ -15,8 +15,8 @@ import keyCode from "./js/controller/KeyCode.js";
 //PROYECTO MC2 2024
 //ALUMNO: Javier Ricardo Yllescas Barrios
 //CARNE: 201906795
-//Version Programa: V3.0.1
-//{ Funciona con 3, 9, 15 cartas }
+//Version Programa: V3.1.0
+//{ Funciona con 3, 9, 15, 21 cartas }
 //Correcciones pendientes: 
 //-Mostrar solo 3 filas
 //-Funcinoe con mas cartas
@@ -41,8 +41,8 @@ document.getElementById("container3D").appendChild(renderer.domElement);
 
 //Cartas 3D
 let object;
-let object2, object3, object4, object5, object6, object7, object8, object9, object10, object11, object12, object13, object14, object15;
-let objects = [object,object2,object3, object4,object5,object6,object7,object8,object9,object10,object11,object12,object13,object14,object15]
+let object2, object3, object4, object5, object6, object7, object8, object9, object10, object11, object12, object13, object14, object15, object16, object17, object18, object19, object20, object21;
+let objects = [object,object2,object3, object4,object5,object6,object7,object8,object9,object10,object11,object12,object13,object14,object15, object16, object17, object18, object19, object20, object21]
 //Numero de cartas
 let cardnumber = window.location.pathname.split('/').pop()
 //Camara posicion
@@ -52,6 +52,8 @@ if (cardnumber == 3){
   camera.position.z = 7;
 }else if (cardnumber == 15){
   camera.position.z = 10.8;
+}else if (cardnumber == 21){
+  camera.position.z = 11;
 }else{
   camera.position.z = 15;
 }
@@ -255,17 +257,32 @@ function animate() {
       let contz = 0
       const ajustey = numerodecartas === 9 ? -2.2 : numerodecartas === 15 ? 0.5 : 0;
       for (let i = 0; i < numerodecartas; i++) {
-        // Ciclo de -3, 0, 3 para position.x
-        objects[i].position.x = (i % 3 === 0) ? -3 : (i % 3 === 1) ? 0 : 3;
 
-        // Calcular posicion Y 
-        let fila = Math.floor(i / 3); // Determina en qué fila estamos
-        objects[i].position.y = 6 -1- (fila * 2.7) + ajustey; // Cada fila se mueve 4 unidades hacia abajo
+        if (numerodecartas <= 15){
+          // Ciclo de -3, 0, 3 para position.x
+          objects[i].position.x = (i % 3 === 0) ? -3 : (i % 3 === 1) ? 0 : 3;
 
-        //Calcular posicion Z
-        objects[i].position.z += contz
-        //aumenta contador z
-        contz += 0.05
+          // Calcular posicion Y 
+          let fila = Math.floor(i / 3); // Determina en qué fila estamos
+          objects[i].position.y = 6 -1- (fila * 2.7) + ajustey; // Cada fila se mueve 4 unidades hacia abajo
+
+          //Calcular posicion Z
+          objects[i].position.z += contz
+          //aumenta contador z
+          contz += 0.05
+        }else if (numerodecartas = 21){
+          objects[i].position.x = (i % 5 === 0) ? -6 : 
+                        (i % 5 === 1) ? -3 : 
+                        (i % 5 === 2) ? 0 : 
+                        (i % 5 === 3) ? 3 : 6;
+          // Calcular posicion Y 
+          let fila = Math.floor(i / 5); // Determina en qué fila estamos
+          objects[i].position.y = 6 -1- (fila * 2.7) + ajustey; // Cada fila se mueve 4 unidades hacia abajo
+          //Calcular posicion Z
+          objects[i].position.z += contz
+          //aumenta contador z
+          contz += 0.05
+        }
 
         renderer.render(scene, camera);
       }
@@ -359,12 +376,11 @@ function animate() {
         if (fase1 == true && fase2 == false && numerodelanzamientos2 < maximonumerodelanzamientos){
           //Repartir cartas
           let repartir = setInterval(() => {
-            
-            let cont = 0
-            let conty = -3
-            let contz = 0
             let numerodecartas = parseInt(cardnumber)
-            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : 0;
+            let cont = 0
+            let conty = numerodecartas === 21 ? -6: -3
+            let contz = 0
+            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 :numerodecartas === 21 ? 0.5: 0;
             console.log("ajustey",ajustey)
             for (let i = 0; i < cardnumber ; i++) {
               cont += 1
@@ -388,7 +404,7 @@ function animate() {
                 addgrupocard3(carta)
               }
               //Posicion Y y Z
-              carta.position.y -= limiteinf(carta.position.y,0.05,conty,esperaranimacion) 
+              carta.position.y -= limiteinf(carta.position.y,0.1,conty,esperaranimacion) 
               carta.position.z = contz
               //ciclos de 3
               if (cont >= 3){ cont = 0; conty += 1 + ajustey ; contz -= 0.3}
@@ -716,11 +732,11 @@ function animate() {
         if (fase1 == true && fase2 == true && fase3 == true && fase4 == true && fase5 == false && numerodelanzamientos2 < maximonumerodelanzamientos){
             //Repartir cartas
             let creargrupos = setInterval(() => {
-            let cont = 0
-            let conty = -3
-            let contz = 0
             let numerodecartas = parseInt(cardnumber)
-            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : 0;
+            let cont = 0
+            let conty = numerodecartas === 21 ? -6: -3
+            let contz = 0
+            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : numerodecartas === 21 ? 0.5: 0;
             for (let i = 0; i < ordenvaraja.length ; i++) {
               cont += 1
               let carta = objects[ordenvaraja[i]]
@@ -791,11 +807,11 @@ function animate() {
         if (fase1 == true && fase2 == true && fase3 == true && fase4 == true && fase5 == false && numerodelanzamientos2 < maximonumerodelanzamientos){
             //Repartir cartas
             let creargrupos = setInterval(() => {
-            let cont = 0
-            let conty = -3
-            let contz = 0
             let numerodecartas = parseInt(cardnumber)
-            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : 0;
+            let cont = 0
+            let conty = numerodecartas === 21 ? -6: -3
+            let contz = 0
+            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : numerodecartas === 21 ? 0.5: 0;
             for (let i = 0; i < ordenvaraja.length ; i++) {
               cont += 1
               let carta = objects[ordenvaraja[i]]
