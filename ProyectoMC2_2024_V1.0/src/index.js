@@ -46,8 +46,14 @@ let objects = [object,object2,object3, object4,object5,object6,object7,object8,o
 //Numero de cartas
 let cardnumber = window.location.pathname.split('/').pop()
 //Camara posicion
-if (cardnumber == 15){
-  camera.position.z = 12;
+if (cardnumber == 3){
+  camera.position.z = 10;
+}else if (cardnumber == 9){
+  camera.position.z = 7;
+}else if (cardnumber == 15){
+  camera.position.z = 10.8;
+}else{
+  camera.position.z = 15;
 }
 
 
@@ -235,7 +241,7 @@ function animate() {
   let objetoscargados = true;
   for (let i = 0; i < cardnumber ; i++) {
     if (objects[i]){
-      objetoscargados = true;
+      // objetoscargados = true;
     }else{
       objetoscargados = false;
     }
@@ -245,34 +251,25 @@ function animate() {
   if(objetoscargados){
     if (flagstart){
       // Asignar posiciones en función del número de cartas
-      if (cardnumber == 9 || cardnumber == 3){
-        for (let i = 0; i < cardnumber; i++) {
-          // Ciclo de -3, 0, 3 para position.x
-          objects[i].position.x = (i % 3 === 0) ? -3 : (i % 3 === 1) ? 0 : 3;
+      let numerodecartas = parseInt(cardnumber)
+      let contz = 0
+      const ajustey = numerodecartas === 9 ? -2.2 : numerodecartas === 15 ? 0.5 : 0;
+      for (let i = 0; i < numerodecartas; i++) {
+        // Ciclo de -3, 0, 3 para position.x
+        objects[i].position.x = (i % 3 === 0) ? -3 : (i % 3 === 1) ? 0 : 3;
 
-          // Calcular posicion Y 
-          let fila = Math.floor(i / 3); // Determina en qué fila estamos
-          objects[i].position.y = 4 - (fila * 4); // Cada fila se mueve 4 unidades hacia abajo
+        // Calcular posicion Y 
+        let fila = Math.floor(i / 3); // Determina en qué fila estamos
+        objects[i].position.y = 6 -1- (fila * 2.7) + ajustey; // Cada fila se mueve 4 unidades hacia abajo
 
-          renderer.render(scene, camera);
-        }
+        //Calcular posicion Z
+        objects[i].position.z += contz
+        //aumenta contador z
+        contz += 0.05
+
+        renderer.render(scene, camera);
       }
-      if (cardnumber == 15 || cardnumber == 21){
-        for (let i = 0; i < cardnumber; i++) {
-          
-          objects[i].position.x = (i % 5 === 0) ? -6 : 
-                                (i % 5 === 1) ? -3 : 
-                                (i % 5 === 2) ? 0 : 
-                                (i % 5 === 3) ? 3 : 6;
-
-          // Calcular posicion Y 
-          let fila = Math.floor(i / 5); // Determina en qué fila estamos
-          objects[i].position.y = 5 - (fila * 5); 
-
-          renderer.render(scene, camera);
-        }
-      }
-      //Bandera inicio programa
+      
       flagstart = false;
 
       document.getElementById("title").innerHTML = "Presiona Enter.";
