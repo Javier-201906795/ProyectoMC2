@@ -15,7 +15,7 @@ import keyCode from "./js/controller/KeyCode.js";
 //PROYECTO MC2 2024
 //ALUMNO: Javier Ricardo Yllescas Barrios
 //CARNE: 201906795
-//Version Programa: V3.0.0
+//Version Programa: V3.0.1
 //{ Funciona con 3, 9, 15 cartas }
 //Correcciones pendientes: 
 //-Mostrar solo 3 filas
@@ -363,6 +363,9 @@ function animate() {
             let cont = 0
             let conty = -3
             let contz = 0
+            let numerodecartas = parseInt(cardnumber)
+            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : 0;
+            console.log("ajustey",ajustey)
             for (let i = 0; i < cardnumber ; i++) {
               cont += 1
               //obtener carta
@@ -385,13 +388,13 @@ function animate() {
                 addgrupocard3(carta)
               }
               //Posicion Y y Z
-              carta.position.y -= limiteinf(carta.position.y,0.05,conty,esperaranimacion)
+              carta.position.y -= limiteinf(carta.position.y,0.05,conty,esperaranimacion) 
               carta.position.z = contz
               //ciclos de 3
-              if (cont >= 3){ cont = 0; conty += 1 ; contz -= 0.3}
+              if (cont >= 3){ cont = 0; conty += 1 + ajustey ; contz -= 0.3}
             }
             
-
+            
             //Render
             renderer.render(scene, camera);
           }, 1000/60)
@@ -716,6 +719,8 @@ function animate() {
             let cont = 0
             let conty = -3
             let contz = 0
+            let numerodecartas = parseInt(cardnumber)
+            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : 0;
             for (let i = 0; i < ordenvaraja.length ; i++) {
               cont += 1
               let carta = objects[ordenvaraja[i]]
@@ -723,7 +728,7 @@ function animate() {
               carta.rotation.y = 0 
               if (cont == 1){
                 carta.position.x = -3
-                carta.position.y = conty
+                carta.position.y = conty 
                 carta.position.z = contz
                 addgrupocard1(objects[ordenvaraja[i]])
               }
@@ -735,12 +740,12 @@ function animate() {
               }
               if (cont == 3){
                 carta.position.x = 3
-                carta.position.y = conty
+                carta.position.y = conty 
                 carta.position.z = contz
                 addgrupocard3(objects[ordenvaraja[i]])
               }
               //ciclos de 3
-              if (cont >= 3){ cont = 0; conty += 1 ; contz -= 0.3}
+              if (cont >= 3){ cont = 0; conty += 1 + ajustey; contz -= 0.3}
             }
             
             renderer.render(scene, camera);
@@ -789,6 +794,8 @@ function animate() {
             let cont = 0
             let conty = -3
             let contz = 0
+            let numerodecartas = parseInt(cardnumber)
+            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : 0;
             for (let i = 0; i < ordenvaraja.length ; i++) {
               cont += 1
               let carta = objects[ordenvaraja[i]]
@@ -813,7 +820,7 @@ function animate() {
                 addgrupocard3(objects[ordenvaraja[i]])
               }
               //ciclos de 3
-              if (cont >= 3){ cont = 0; conty += 1 ; contz -= 0.3}
+              if (cont >= 3){ cont = 0; conty += 1 + ajustey ; contz -= 0.3}
             }
             
             renderer.render(scene, camera);
