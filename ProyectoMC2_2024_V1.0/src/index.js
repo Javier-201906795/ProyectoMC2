@@ -15,11 +15,8 @@ import keyCode from "./js/controller/KeyCode.js";
 //PROYECTO MC2 2024
 //ALUMNO: Javier Ricardo Yllescas Barrios
 //CARNE: 201906795
-//Version Programa: V3.1.0
+//Version Programa: V4.0.0
 //{ Funciona con 3, 9, 15, 21 cartas }
-//Correcciones pendientes: 
-//-Mostrar solo 3 filas
-//-Funcinoe con mas cartas
 
 
 
@@ -41,8 +38,8 @@ document.getElementById("container3D").appendChild(renderer.domElement);
 
 //Cartas 3D
 let object;
-let object2, object3, object4, object5, object6, object7, object8, object9, object10, object11, object12, object13, object14, object15, object16, object17, object18, object19, object20, object21;
-let objects = [object,object2,object3, object4,object5,object6,object7,object8,object9,object10,object11,object12,object13,object14,object15, object16, object17, object18, object19, object20, object21]
+let object2, object3, object4, object5, object6, object7, object8, object9, object10, object11, object12, object13, object14, object15, object16, object17, object18, object19, object20, object21, object22, object23, object24, object25, object26, object27;
+let objects = [object,object2,object3, object4,object5,object6,object7,object8,object9,object10,object11,object12,object13,object14,object15, object16, object17, object18, object19, object20, object21, object22, object23, object24, object25, object26, object27]
 //Numero de cartas
 let cardnumber = window.location.pathname.split('/').pop()
 //Camara posicion
@@ -55,7 +52,7 @@ if (cardnumber == 3){
 }else if (cardnumber == 21){
   camera.position.z = 11;
 }else{
-  camera.position.z = 15;
+  camera.position.z = 11;
 }
 
 
@@ -253,12 +250,12 @@ function animate() {
   if(objetoscargados){
     if (flagstart){
       // Asignar posiciones en función del número de cartas
-      let numerodecartas = parseInt(cardnumber)
+      let numerodecartas2 = parseInt(cardnumber)
       let contz = 0
-      const ajustey = numerodecartas === 9 ? -2.2 : numerodecartas === 15 ? 0.5 : 0;
-      for (let i = 0; i < numerodecartas; i++) {
-
-        if (numerodecartas <= 15){
+      const ajustey = numerodecartas2 === 9 ? -2.2 : numerodecartas2 === 15 ? 0.5 : 0;
+      for (let i = 0; i < numerodecartas2; i++) {
+        console.log("numerodecartas2", numerodecartas2)
+        if (numerodecartas2 <= 15){
           // Ciclo de -3, 0, 3 para position.x
           objects[i].position.x = (i % 3 === 0) ? -3 : (i % 3 === 1) ? 0 : 3;
 
@@ -270,13 +267,28 @@ function animate() {
           objects[i].position.z += contz
           //aumenta contador z
           contz += 0.05
-        }else if (numerodecartas = 21){
+        }else if (numerodecartas2 == 21){
           objects[i].position.x = (i % 5 === 0) ? -6 : 
                         (i % 5 === 1) ? -3 : 
                         (i % 5 === 2) ? 0 : 
                         (i % 5 === 3) ? 3 : 6;
           // Calcular posicion Y 
           let fila = Math.floor(i / 5); // Determina en qué fila estamos
+          objects[i].position.y = 6 -1- (fila * 2.7) + ajustey; // Cada fila se mueve 4 unidades hacia abajo
+          //Calcular posicion Z
+          objects[i].position.z += contz
+          //aumenta contador z
+          contz += 0.05
+        }else if (numerodecartas2 == 27){
+          objects[i].position.x = (i % 7 === 0) ? -9 : 
+                        (i % 7 === 1) ? -6 : 
+                        (i % 7 === 2) ? -3 : 
+                        (i % 7 === 3) ? 0 : 
+                        (i % 7 === 4) ? 3 : 
+                        (i % 7 === 5) ? 6 : 9;
+
+          // Calcular posición Y
+          let fila = Math.floor(i / 7);
           objects[i].position.y = 6 -1- (fila * 2.7) + ajustey; // Cada fila se mueve 4 unidades hacia abajo
           //Calcular posicion Z
           objects[i].position.z += contz
