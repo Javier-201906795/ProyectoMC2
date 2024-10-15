@@ -16,7 +16,7 @@ import keyCode from "./js/controller/KeyCode.js";
 //ALUMNO: Javier Ricardo Yllescas Barrios
 //CARNE: 201906795
 //Version Programa: V4.0.0
-//{ Funciona con 3, 9, 15, 21 cartas }
+//{ Funciona con 3, 9, 15, 21, 27 cartas }
 
 
 
