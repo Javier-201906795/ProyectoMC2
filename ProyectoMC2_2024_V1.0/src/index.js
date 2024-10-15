@@ -16,7 +16,7 @@ import keyCode from "./js/controller/KeyCode.js";
 //ALUMNO: Javier Ricardo Yllescas Barrios
 //CARNE: 201906795
 //Version Programa: V4.0.0
-//{ Funciona con 3, 9, 15, 21, 27 cartas }
+//{ Funciona con 3, 9, 15, 21, 27, 33 cartas }
 
 
 
@@ -38,8 +38,8 @@ document.getElementById("container3D").appendChild(renderer.domElement);
 
 //Cartas 3D
 let object;
-let object2, object3, object4, object5, object6, object7, object8, object9, object10, object11, object12, object13, object14, object15, object16, object17, object18, object19, object20, object21, object22, object23, object24, object25, object26, object27;
-let objects = [object,object2,object3, object4,object5,object6,object7,object8,object9,object10,object11,object12,object13,object14,object15, object16, object17, object18, object19, object20, object21, object22, object23, object24, object25, object26, object27]
+let object2, object3, object4, object5, object6, object7, object8, object9, object10, object11, object12, object13, object14, object15, object16, object17, object18, object19, object20, object21, object22, object23, object24, object25, object26, object27, object28, object29, object30, object31, object32,object33;
+let objects = [object,object2,object3, object4,object5,object6,object7,object8,object9,object10,object11,object12,object13,object14,object15, object16, object17, object18, object19, object20, object21, object22, object23, object24, object25, object26, object27, object28, object29, object30, object31, object32,object33]
 //Numero de cartas
 let cardnumber = window.location.pathname.split('/').pop()
 //Camara posicion
@@ -51,6 +51,10 @@ if (cardnumber == 3){
   camera.position.z = 10.8;
 }else if (cardnumber == 21){
   camera.position.z = 11;
+}else if (cardnumber == 27){
+  camera.position.z = 11;
+}else if (cardnumber == 33){
+  camera.position.z = 12;
 }else{
   camera.position.z = 11;
 }
@@ -172,6 +176,9 @@ let flagfinal = false
 
 function final(){
   if (!flagfinal){
+    //camara
+    camera.position.z = caminiz;
+    camera.position.y = caminiy;
     //obtener numero de carta
     let cartaseleccionada = cartaadivinar()
     console.log("Cartan seleccionanda:",cartaseleccionada)
@@ -233,6 +240,11 @@ let numerodelanzamientos2 = 0
 let banderlanzamiento = true;
 let alternar = false;
 
+//camara
+let caminiz = camera.position.z
+let caminiy = camera.position.y
+
+
 // Función de animación se activa cada segundo
 function animate() {
 
@@ -280,6 +292,21 @@ function animate() {
           //aumenta contador z
           contz += 0.05
         }else if (numerodecartas2 == 27){
+          objects[i].position.x = (i % 7 === 0) ? -9 : 
+                        (i % 7 === 1) ? -6 : 
+                        (i % 7 === 2) ? -3 : 
+                        (i % 7 === 3) ? 0 : 
+                        (i % 7 === 4) ? 3 : 
+                        (i % 7 === 5) ? 6 : 9;
+
+          // Calcular posición Y
+          let fila = Math.floor(i / 7);
+          objects[i].position.y = 6 -1- (fila * 2.7) + ajustey; // Cada fila se mueve 4 unidades hacia abajo
+          //Calcular posicion Z
+          objects[i].position.z += contz
+          //aumenta contador z
+          contz += 0.05
+        }else if (numerodecartas2 == 33){
           objects[i].position.x = (i % 7 === 0) ? -9 : 
                         (i % 7 === 1) ? -6 : 
                         (i % 7 === 2) ? -3 : 
@@ -390,10 +417,16 @@ function animate() {
           let repartir = setInterval(() => {
             let numerodecartas = parseInt(cardnumber)
             let cont = 0
-            let conty = numerodecartas === 21 ? -6: -3
+            let conty = numerodecartas === 21 ? -6: numerodecartas === 33 ? -8: -3
             let contz = 0
-            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 :numerodecartas === 21 ? 0.5: 0;
-            console.log("ajustey",ajustey)
+            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 :numerodecartas === 21 ? 0.5: numerodecartas === 33 ? 0.25: 0;
+            console.log("conty",conty,"ajustey",ajustey)
+            //camara
+            let zoom = numerodecartas === 33 ? 10: caminiz;
+            let camy = numerodecartas === 33 ? -2.5: 0;
+            camera.position.z = zoom;
+            camera.position.y = caminiy + camy;
+            //ordenar cartas
             for (let i = 0; i < cardnumber ; i++) {
               cont += 1
               //obtener carta
@@ -746,9 +779,15 @@ function animate() {
             let creargrupos = setInterval(() => {
             let numerodecartas = parseInt(cardnumber)
             let cont = 0
-            let conty = numerodecartas === 21 ? -6: -3
+            let conty = numerodecartas === 21 ? -6:numerodecartas === 21 ? -8: -3
             let contz = 0
-            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : numerodecartas === 21 ? 0.5: 0;
+            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : numerodecartas === 21 ? 0.5: numerodecartas === 21 ? 0.25:0;
+            //camara
+            let zoom = numerodecartas === 33 ? 10: caminiz;
+            let camy = numerodecartas === 33 ? -2.5: 0;
+            camera.position.z = zoom;
+            camera.position.y = caminiy - camy;
+            //cartas
             for (let i = 0; i < ordenvaraja.length ; i++) {
               cont += 1
               let carta = objects[ordenvaraja[i]]
@@ -821,9 +860,15 @@ function animate() {
             let creargrupos = setInterval(() => {
             let numerodecartas = parseInt(cardnumber)
             let cont = 0
-            let conty = numerodecartas === 21 ? -6: -3
+            let conty = numerodecartas === 21 ? -6: numerodecartas === 33 ? -8: -3
             let contz = 0
-            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : numerodecartas === 21 ? 0.5: 0;
+            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : numerodecartas === 21 ? 0.5: numerodecartas === 33 ? 0.25: 0;
+            //camara
+            let zoom = numerodecartas === 33 ? 10: caminiz;
+            let camy = numerodecartas === 33 ? -2.5: 0;
+            camera.position.z = zoom;
+            camera.position.y = caminiy + camy;
+            //cartas
             for (let i = 0; i < ordenvaraja.length ; i++) {
               cont += 1
               let carta = objects[ordenvaraja[i]]
