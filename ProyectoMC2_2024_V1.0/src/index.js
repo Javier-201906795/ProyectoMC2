@@ -811,14 +811,15 @@ function animate() {
             let creargrupos = setInterval(() => {
             let numerodecartas = parseInt(cardnumber)
             let cont = 0
-            let conty = numerodecartas === 21 ? -6:numerodecartas === 21 ? -8: -3
+            let conty = numerodecartas === 21 ? -6:numerodecartas === 33 ? -8: numerodecartas === 39 ? -12: -3
             let contz = 0
-            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : numerodecartas === 21 ? 0.5: numerodecartas === 21 ? 0.25:0;
+            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : numerodecartas === 21 ? 0.5: numerodecartas === 21 ? 0.5:  numerodecartas === 39 ? -0.05:0;
             //camara
-            let zoom = numerodecartas === 33 ? 10: caminiz;
-            let camy = numerodecartas === 33 ? -2.5: 0;
+            let zoom = numerodecartas === 33 ? 10: numerodecartas === 39 ? 10: caminiz;
+            let camy = numerodecartas === 33 ? -2.5: numerodecartas === 39 ? 6: 0;
             camera.position.z = zoom;
             camera.position.y = caminiy - camy;
+            console.log("caminiy", caminiy, "camy", camy, "total", caminiy - camy)
             //cartas
             for (let i = 0; i < ordenvaraja.length ; i++) {
               cont += 1
