@@ -404,6 +404,15 @@ function animate() {
         //Detiene en tiempo determinado
         setTimeout(() => {
           clearInterval(juntar9);
+
+          //mover posiciones
+          for (let i = 0; i < cardnumber ; i++) {
+            //mover hacia la arriva
+            objects[i].position.y= 6
+            //mover hacia la derecha
+            objects[i].position.x=-8
+          }
+
           
           console.log("ENTER alternar",alternar,"fase1", fase1, "fase2", fase2 ,"fase3", fase3,"fase4", fase4,"fase5", fase5)
 
@@ -440,13 +449,13 @@ function animate() {
           let repartir = setInterval(() => {
             let numerodecartas = parseInt(cardnumber)
             let cont = 0
-            let conty = numerodecartas === 21 ? -6: numerodecartas === 33 ? -8: -3
+            let conty = numerodecartas === 21 ? -6: numerodecartas === 33 ? -8: numerodecartas === 39 ? -12: -3
             let contz = 0
-            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 :numerodecartas === 21 ? 0.5: numerodecartas === 33 ? 0.25: 0;
+            let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 :numerodecartas === 21 ? 0.5: numerodecartas === 33 ? 0.25: numerodecartas === 39 ? 0.25: 0;
             console.log("conty",conty,"ajustey",ajustey)
             //camara
-            let zoom = numerodecartas === 33 ? 10: caminiz;
-            let camy = numerodecartas === 33 ? -2.5: 0;
+            let zoom = numerodecartas === 33 ? 10: numerodecartas === 39 ? 10: caminiz;
+            let camy = numerodecartas === 33 ? -2.5:numerodecartas === 39 ? -5.5: 0;
             camera.position.z = zoom;
             camera.position.y = caminiy + camy;
             //ordenar cartas
@@ -475,7 +484,7 @@ function animate() {
               carta.position.y -= limiteinf(carta.position.y,0.1,conty,esperaranimacion) 
               carta.position.z = contz
               //ciclos de 3
-              if (cont >= 3){ cont = 0; conty += 1 + ajustey ; contz -= 0.3}
+              if (cont >= 3){ cont = 0; conty += 0.75 + ajustey ; contz -= 0.3}
             }
             
             
