@@ -60,6 +60,9 @@ if (cardnumber == 3){
   camera.position.z = 11 + extrazoom;
 }else if (cardnumber == 33){
   camera.position.z = 12 + extrazoom;
+}else if (cardnumber == 39){
+  camera.position.z = 15 + extrazoom;
+  camera.position.y = camera.position.y - 2
 }else{
   camera.position.z = 11 + extrazoom;
 }
@@ -311,7 +314,22 @@ function animate() {
           objects[i].position.z += contz
           //aumenta contador z
           contz += 0.05
-        }else if (numerodecartas2 == 33){
+        }else if (numerodecartas2 == 33 || numerodecartas2 == 39){
+          objects[i].position.x = (i % 7 === 0) ? -9 : 
+                        (i % 7 === 1) ? -6 : 
+                        (i % 7 === 2) ? -3 : 
+                        (i % 7 === 3) ? 0 : 
+                        (i % 7 === 4) ? 3 : 
+                        (i % 7 === 5) ? 6 : 9;
+
+          // Calcular posición Y
+          let fila = Math.floor(i / 7);
+          objects[i].position.y = 6 -1- (fila * 2.7) + ajustey; // Cada fila se mueve 4 unidades hacia abajo
+          //Calcular posicion Z
+          objects[i].position.z += contz
+          //aumenta contador z
+          contz += 0.05
+        }else{
           objects[i].position.x = (i % 7 === 0) ? -9 : 
                         (i % 7 === 1) ? -6 : 
                         (i % 7 === 2) ? -3 : 
