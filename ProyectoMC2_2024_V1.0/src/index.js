@@ -186,7 +186,7 @@ function final(){
   if (!flagfinal){
     //camara
     let numerodecartas = parseInt(cardnumber)
-    camera.position.z = numerodecartas === 21 ? 5: numerodecartas === 27 ? 8: numerodecartas === 33 ? 5: numerodecartas === 39 ? 10: 5;
+    camera.position.z = numerodecartas === 21 ? 7: numerodecartas === 27 ? 8: numerodecartas === 33 ? 5: numerodecartas === 39 ? 10: 5;
     console.log("zoom", camera.position.z )
     camera.position.y = numerodecartas === 21 ? caminiy: numerodecartas === 27 ? caminiy: numerodecartas === 33 ? caminiy: numerodecartas === 39 ? caminiy+2: caminiy;
     //obtener numero de carta
