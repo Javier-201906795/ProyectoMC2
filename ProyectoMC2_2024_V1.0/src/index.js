@@ -454,8 +454,8 @@ function animate() {
             let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 :numerodecartas === 21 ? 0.5: numerodecartas === 33 ? 0.25: numerodecartas === 39 ? 0.25: 0;
             console.log("conty",conty,"ajustey",ajustey)
             //camara
-            let zoom = numerodecartas === 33 ? 10: numerodecartas === 39 ? 10: caminiz;
-            let camy = numerodecartas === 33 ? -2.5:numerodecartas === 39 ? -5.5: 0;
+            let zoom = numerodecartas === 21 ? 8:numerodecartas === 33 ? 10: numerodecartas === 39 ? 10: caminiz;
+            let camy = numerodecartas === 21 ? -3.5:numerodecartas === 33 ? -2.5:numerodecartas === 39 ? -5.5: 0;
             camera.position.z = zoom;
             camera.position.y = caminiy + camy;
             //ordenar cartas
@@ -815,7 +815,7 @@ function animate() {
             let contz = 0
             let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : numerodecartas === 21 ? 0.5: numerodecartas === 21 ? 0.5:  numerodecartas === 39 ? -0.05:0;
             //camara
-            let camy = numerodecartas === 33 ? -2.5: numerodecartas === 39 ? 6: 0;
+            let camy = numerodecartas === 21 ? 2: numerodecartas === 33 ? -2.5: numerodecartas === 39 ? 6: 0;
             camera.position.y = caminiy - camy;
             console.log("caminiy", caminiy, "camy", camy, "total", caminiy - camy)
             //cartas
@@ -895,7 +895,7 @@ function animate() {
             let contz = 0
             let ajustey = numerodecartas === 9 ? 2 : numerodecartas === 15 ? 1 : numerodecartas === 21 ? 0.5: numerodecartas === 33 ? 0.25: 0;
             //camara
-            let camy = numerodecartas === 33 ? -2.5: numerodecartas === 39 ? 4: 0;
+            let camy = numerodecartas === 21 ? -2: numerodecartas === 33 ? -2.5: numerodecartas === 39 ? 4: 0;
             camera.position.y = caminiy + camy;
             //cartas
             for (let i = 0; i < ordenvaraja.length ; i++) {
