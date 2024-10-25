@@ -42,29 +42,27 @@ let object2, object3, object4, object5, object6, object7, object8, object9, obje
 let objects = [object,object2,object3, object4,object5,object6,object7,object8,object9,object10,object11,object12,object13,object14,object15, object16, object17, object18, object19, object20, object21, object22, object23, object24, object25, object26, object27, object28, object29, object30, object31, object32,object33]
 //Numero de cartas
 let url = window.location.pathname.split('/').pop()
-let urlsegmentos = url.split('z')
-let cardnumber = parseInt(urlsegmentos[0])
-let extrazoom = parseInt(urlsegmentos[1])
+let cardnumber = parseInt(url)
 // console.log(url)
-// console.log("urlsegmentos", urlsegmentos,"cardnumber", cardnumber,"extrazoom", extrazoom)
+console.log("cardnumber", cardnumber)
 //Camara posicion
 if (cardnumber == 3){
-  camera.position.z = 10 + extrazoom;
+  camera.position.z = 10;
 }else if (cardnumber == 9){
-  camera.position.z = 7 + extrazoom;
+  camera.position.z = 7;
 }else if (cardnumber == 15){
-  camera.position.z = 10.8 + extrazoom;
+  camera.position.z = 10.8;
 }else if (cardnumber == 21){
-  camera.position.z = 11 + extrazoom;
+  camera.position.z = 11;
 }else if (cardnumber == 27){
-  camera.position.z = 11 + extrazoom;
+  camera.position.z = 11;
 }else if (cardnumber == 33){
-  camera.position.z = 12 + extrazoom;
+  camera.position.z = 12;
 }else if (cardnumber == 39){
-  camera.position.z = 15 + extrazoom;
+  camera.position.z = 15;
   camera.position.y = camera.position.y - 2
 }else{
-  camera.position.z = 11 + extrazoom;
+  camera.position.z = 11;
 }
 
 
