@@ -198,6 +198,10 @@ function final(){
     renderer.render(scene, camera);
     // flagfinal = true
     document.getElementById("title").innerHTML = "Esta es tu Carta. Presiona (M)";
+    //Redireccionar a menu
+    setTimeout(function() {
+      window.location.href = 'http://localhost:3000/3'; // Reemplaza con la URL a la que deseas redirigir
+    }, 5000); 
   }
 }
 
