@@ -185,7 +185,7 @@ let flagfinal = false
 function final(){
   if (!flagfinal){
     //camara
-    camera.position.z = caminiz;
+    camera.position.z = 5;
     camera.position.y = caminiy;
     //obtener numero de carta
     let cartaseleccionada = cartaadivinar()
