@@ -200,7 +200,8 @@ function final(){
     document.getElementById("title").innerHTML = "Esta es tu Carta. Presiona (M)";
     //Redireccionar a menu
     setTimeout(function() {
-      window.location.href = 'http://localhost:3000/3'; // Reemplaza con la URL a la que deseas redirigir
+      // window.location.href = window.location.protocol + '//' + window.location.host + '/menu';
+      document.getElementById("btnmenu").style.display = "block";
     }, 5000); 
   }
 }

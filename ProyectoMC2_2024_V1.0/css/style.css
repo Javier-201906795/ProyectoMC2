@@ -54,6 +54,20 @@ button {
   margin: 10px
 }
 
-.button:hover {
-  box-shadow: 0 12px 16px 0 rgba(255, 255, 255, 1), 0 17px 50px 0 rgba(255, 255, 255, 1);
+a {
+  background-color: #aa3904; /* Green */
+  border: none;
+  color: white;
+  padding: 20px 42px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  opacity: 0.9;
+  font-weight: bold;
+}
+
+#btnmenu{
+  display: inline-flex;
 }
