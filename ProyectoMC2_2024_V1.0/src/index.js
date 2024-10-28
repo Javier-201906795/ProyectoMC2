@@ -273,6 +273,7 @@ function animate() {
 
   //render inicial
   if(objetoscargados){
+    
     if (flagstart){
       // Asignar posiciones en función del número de cartas
       let numerodecartas2 = parseInt(cardnumber)
