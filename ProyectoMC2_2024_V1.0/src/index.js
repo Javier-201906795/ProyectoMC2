@@ -200,8 +200,8 @@ function final(){
     document.getElementById("title").innerHTML = "Esta es tu Carta. Presiona (M)";
     //Redireccionar a menu
     setTimeout(function() {
-      // window.location.href = window.location.protocol + '//' + window.location.host + '/menu';
-      document.getElementById("btnmenu").style.display = "block";
+      window.location.href = window.location.protocol + '//' + window.location.host + '/menu';
+      // document.getElementById("btnmenu").style.display = "block";
     }, 5000); 
   }
 }
