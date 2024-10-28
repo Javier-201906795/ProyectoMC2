@@ -1,0 +1,66 @@
+
+
+body {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    background-color: #000;
+    background: url("/css/fondo.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    opacity: 1;
+  }
+  
+    
+  
+  
+  header {
+    margin: 100px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+  }
+  
+  header h1 {
+    font-size: 4vmax;
+    font-weight: 900;
+    margin: 0;
+    text-align: right;
+    padding-right: 5%;
+  }
+  
+  #container3D canvas {
+    width: 100vw !important;
+    height: 100vh !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  #title {
+    margin-left: 7em;
+  }
+  
+  #divcenter{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 30%;
+    width: 50%;
+    margin: -15% 0 0 -25%;
+  }
+  
+  a {
+    background-color: #aa3904; /* Green */
+    border: none;
+    color: white;
+    padding: 20px 42px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    opacity: 0.9;
+    font-weight: bold;
+  }
+ 
